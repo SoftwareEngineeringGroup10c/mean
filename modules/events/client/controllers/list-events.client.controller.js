@@ -11,6 +11,15 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
     //Initialize some variables
     $scope.editEvent_flag = 0;
 
+    $scope.activeTab = 'requests';
+
+    /*
+     Function to set the active tab
+     */
+    $scope.setActiveTab = function (value) {
+      $scope.activeTab = value;
+    };
+
 
     $scope.name = null;
     $scope.date = null;

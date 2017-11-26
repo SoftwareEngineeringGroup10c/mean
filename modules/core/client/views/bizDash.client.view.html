@@ -6,10 +6,10 @@
             <p class="dashboard-header">Dashboard</p>
             <div class="row" style="justify-content: center">
               <ul class="nav nav-tabs">
-                <li class="active"><a class="nav-link org-menu-selects" style="color:#1B5689; cursor:pointer" ui-sref=".eventList">Event Requests</a></li>
-                <li><a class="org-menu-selects nav-link" style="color:#1B5689; cursor:pointer" ui-sref=".calendar">Event Calendar</a></li>
-                <li><a class="org-menu-selects nav-link" style="color:#1B5689; cursor:pointer" ui-sref=".pastEvents">Past Events</a></li>
-                <li><a class="org-menu-selects nav-link" style="color:#1B5689; cursor:pointer" ui-sref = ".notifications">Notifications</a></li>
+                <li ng-class="{active : activeTab == 'requests'}"><a ng-click="setActiveTab('requests')" class="nav-link org-menu-selects" style="color:#1B5689; cursor:pointer" ui-sref=".eventList">Requests</a></li>
+                <li ng-class="{active : activeTab == 'calendar'}"><a ng-click="setActiveTab('calendar')" class="org-menu-selects nav-link" style="color:#1B5689; cursor:pointer" ui-sref=".calendar">Calendar</a></li>
+                <li ng-class="{active : activeTab == 'pastEvents'}"><a ng-click="setActiveTab('pastEvents')" class="org-menu-selects nav-link" style="color:#1B5689; cursor:pointer" ui-sref=".pastEvents">Past Events</a></li>
+                <li ng-class="{active : activeTab == 'notifications'}"><a ng-click="setActiveTab('notifications')" class="org-menu-selects nav-link" style="color:#1B5689; cursor:pointer" ui-sref = ".notifications">Notifications</a></li>
               </ul>
             </div>
             <div ui-view>
