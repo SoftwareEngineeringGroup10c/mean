@@ -41,8 +41,8 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
         templateUrl: 'modules/core/client/views/orgDash.calendar.client.view.html'
       })
       .state('orgDash.notifications', {
-      url: '/notifications',
-      templateUrl: 'modules/core/client/views/orgDash.notifications.client.view.html'
+        url: '/notifications',
+        templateUrl: 'modules/core/client/views/orgDash.notifications.client.view.html'
       })
       .state('orgDash.pastEvents', {
         url: '/pastEvents',
@@ -68,8 +68,8 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
         templateUrl: 'modules/core/client/views/bizDash.calendar.client.view.html'
       })
       .state('bizDash.notifications', {
-      url: '/notifications',
-      templateUrl: 'modules/core/client/views/bizDash.notifications.client.view.html'
+        url: '/notifications',
+        templateUrl: 'modules/core/client/views/bizDash.notifications.client.view.html'
       })
       .state('bizDash.pastEvents', {
         url: '/pastEvents',

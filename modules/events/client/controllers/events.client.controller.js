@@ -49,7 +49,7 @@
           }, 0);
         };
       }
-    }
+    };
 
     // Called after the event has successfully uploaded a new picture
     vm.uploader.onSuccessItem = function (fileItem, response, status, headers) {
@@ -61,7 +61,7 @@
 
       // Clear upload buttons
       vm.cancelUpload();
-    }
+    };
 
     // Called after the event has failed to uploaded a new picture
     vm.uploader.onErrorItem = function (fileItem, response, status, headers) {
@@ -70,7 +70,7 @@
 
       // Show error message
       vm.uperror = response.message;
-    }
+    };
 
     // Change event profile picture
     function uploadEventPicture() {

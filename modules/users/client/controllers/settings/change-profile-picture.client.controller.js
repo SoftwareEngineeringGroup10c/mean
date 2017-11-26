@@ -18,7 +18,7 @@ angular.module('users').controller('ChangeProfilePictureController', ['$scope', 
         return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
       }
     });
-   $scope.uploader2 = new FileUploader({
+    $scope.uploader2 = new FileUploader({
       url: 'api/users/eventBanner',
       alias: 'newEventPicture'
     });
@@ -64,8 +64,8 @@ angular.module('users').controller('ChangeProfilePictureController', ['$scope', 
       $scope.user = Authentication.user = response;
 
       // Clear upload buttons
-       $scope.cancelUploadProf();
-  
+      $scope.cancelUploadProf();
+
     };
     $scope.uploader2.onSuccessItem = function (fileItem, response, status, headers) {
       // Show success message
@@ -75,8 +75,8 @@ angular.module('users').controller('ChangeProfilePictureController', ['$scope', 
       $scope.user = Authentication.user = response;
 
       // Clear upload buttons
-      
-       $scope.cancelUploadEvent();
+
+      $scope.cancelUploadEvent();
     };
     // Called after the user has failed to uploaded a new picture
     $scope.uploader.onErrorItem = function (fileItem, response, status, headers) {
