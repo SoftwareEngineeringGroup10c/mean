@@ -42,9 +42,6 @@
             <div class="radio" ng-repeat="org in event.organizationsPending">
               <label><input type="radio" name="orgRadio" ng-model = "$parent.index_accept" value={{$index}} >{{org}}</label>
             </div>
-            <div class="radio" ng-if="event.organizationsPending.length != 0">
-              <label><input type="radio" name="orgRadio" ng-model = "$parent.index_accept" value="">No Organization</label>
-            </div>
           </div>
         </td>
         <td>{{event.startTime | date:"hh':'mm a"}} - {{event.endTime | date:"hh':'mm a"}}</td>
@@ -52,8 +49,8 @@
         <td>{{event.name}}</td>
         <td>{{event.organizationConfirmed}}</td>
         <td>
-          <button class="btn btn-success" style="text-align: center; display: inline-block; margin:auto; color:white" ng-click="$parent.acceptEvent(index_accept,event);$parent.loadEventList()">Manage<br>Requests</button>
-          <button class="btn btn-warning" style="text-align: center; display: inline-block; margin:auto; color:white" ui-sref="events.edit({ eventId: event._id })">Edit<br>Event</button>
+          <button class="btn btn-success" style="text-align: center; display: inline-block; margin:auto; color:white" ng-class="getButtonStyle(event)" ng-disabled="getButtonStyle(event)" ng-click="$parent.acceptEvent(index_accept,event);$parent.loadEventList()">Accept<br>Requests</button>
+          <button class="btn btn-warning" style="text-align: center; display: inline-block; margin:auto; color:white" ng-class="getButtonStyle(event)" ng-disabled="getButtonStyle(event)" ui-sref="events.edit({ eventId: event._id })">Edit<br>Event</button>
           <button class="btn btn-danger" style="text-align: center; display: inline-block; margin:auto; color:white" ng-click="deleteEvent(event);loadEventList()">Delete<br>Event</button>
         </td>
       </tr>
