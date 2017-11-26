@@ -66,6 +66,8 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
     //Sends a delete request to remove a passed in event from the DB
     $scope.deleteEvent = function (event) {
       if ($window.confirm('Are you sure you want to delete this event?')) {
+// <<<<<<< HEAD
+// =======
 
         if (event.organizationsPending.length > 0) {
           $http({
@@ -97,6 +99,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
           });
         }
 
+// >>>>>>> 9df96041a6e40fad48399d281f05730e6dd8e306
 
         $http({
           method: 'DELETE',
@@ -209,6 +212,8 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
 
     //Allows an organizations to delete their name from the event that is passed in
     $scope.deleteOrgRequest = function (event) {
+// <<<<<<< HEAD
+// =======
       console.log(event.organizationsPending.splice(event.organizationsPending.indexOf($scope.authentication.user.displayName), 1));
 
       if (event.organizationConfirmed === $scope.authentication.user.displayName) {
@@ -226,6 +231,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
           console.log('Failed notification');
         });
       }
+// >>>>>>> 9df96041a6e40fad48399d281f05730e6dd8e306
       var newConfirmed = event.organizationConfirmed;
 
       if ($window.confirm('Are you sure you want to cancel this request?')) {
@@ -235,6 +241,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
         if (newConfirmed === $scope.authentication.user.displayName) {
           newConfirmed = '';
         }
+// <<<<<<< HEAD
 
         $http({
           method: 'PUT',
@@ -251,6 +258,24 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
         });
       }
     };
+// =======
+// >>>>>>> 9df96041a6e40fad48399d281f05730e6dd8e306
+
+//         $http({
+//           method: 'PUT',
+//           url: 'api/events/' + event._id,
+//           data: {
+//             organizationsPending: event.organizationsPending.splice(event.organizationsPending.indexOf($scope.authentication.user.displayName), 1),
+//             organizationConfirmed: newConfirmed
+//           }
+//         }).then(function (res) {
+//           console.log('Successful org event delete');
+//         }, function (res) {
+//           console.log('Failed org event delete');
+//           console.log(res);
+//         });
+//       }
+//     };
 
 
     //Initially loading the events
@@ -274,6 +299,11 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
       return dte.toISOString() > event.dateOfEvent;
     };
 
+    // Returns true if the user signed in is the same one who has the event accepted
+    $scope.filterAcceptedEvents = function (event) {
+      return event.organizationConfirmed === $scope.authentication.user.displayName;
+    };
+
     //Allows a business to create an event
     $scope.createEvent = function () {
       console.log($scope.name);
@@ -290,6 +320,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
           endTime: $scope.eTime,
           location: $scope.location,
           taxIdRequired: $scope.requireTax,
+          banner: $scope.banner,
           hostOrg: $scope.authentication.user.displayName
         }
       }).then(function (res) {
