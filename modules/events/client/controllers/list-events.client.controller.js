@@ -214,7 +214,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
     $scope.deleteOrgRequest = function (event) {
 // <<<<<<< HEAD
 // =======
-      console.log(event.organizationsPending.splice(event.organizationsPending.indexOf($scope.authentication.user.displayName), 1));
+      //console.log(event.organizationsPending.splice(event.organizationsPending.indexOf($scope.authentication.user.displayName), 1));
 
       if (event.organizationConfirmed === $scope.authentication.user.displayName) {
         console.log(event.user.displayName);
@@ -231,7 +231,6 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
           console.log('Failed notification');
         });
       }
-// >>>>>>> 9df96041a6e40fad48399d281f05730e6dd8e306
       var newConfirmed = event.organizationConfirmed;
 
       if ($window.confirm('Are you sure you want to cancel this request?')) {
@@ -241,7 +240,6 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
         if (newConfirmed === $scope.authentication.user.displayName) {
           newConfirmed = '';
         }
-// <<<<<<< HEAD
 
         $http({
           method: 'PUT',
@@ -258,24 +256,20 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
         });
       }
     };
-// =======
-// >>>>>>> 9df96041a6e40fad48399d281f05730e6dd8e306
 
-//         $http({
-//           method: 'PUT',
-//           url: 'api/events/' + event._id,
-//           data: {
-//             organizationsPending: event.organizationsPending.splice(event.organizationsPending.indexOf($scope.authentication.user.displayName), 1),
-//             organizationConfirmed: newConfirmed
-//           }
-//         }).then(function (res) {
-//           console.log('Successful org event delete');
-//         }, function (res) {
-//           console.log('Failed org event delete');
-//           console.log(res);
-//         });
-//       }
-//     };
+        // $http({
+        //   method: 'PUT',
+        //   url: 'api/events/' + event._id,
+        //   data: {
+        //     organizationsPending: event.organizationsPending.splice(event.organizationsPending.indexOf($scope.authentication.user.displayName), 1),
+        //     organizationConfirmed: newConfirmed
+        //   }
+        // }).then(function (res) {
+        //   console.log('Successful org event delete');
+        // }, function (res) {
+        //   console.log('Failed org event delete');
+        //   console.log(res);
+        // });
 
 
     //Initially loading the events
