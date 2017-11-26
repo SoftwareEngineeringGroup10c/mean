@@ -32,8 +32,8 @@
                 <th>Request Event</th>
               </tr>
             </thead>
-            <tbody ng-repeat="event in eventList | filter: query">
-              <tr ng-init="eventObj = event" ng-show = "$parent.displayOrgNonRequest(event) && !filterEventsDate(event)">
+            <tbody ng-repeat="event in eventList | filter: query" ng-init="menu=0">
+              <tr ng-init="eventObj = event; menu = 0" ng-show = "::$parent.displayOrgNonRequest(event) && !filterEventsDate(event)">
                 <th>{{event.user.displayName}}</th>
                 <td>{{event.dateOfEvent | date:"MM'/'dd'/'yyyy"}}</td>
                 <td>{{event.location}}</td>
