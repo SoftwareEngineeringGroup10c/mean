@@ -40,7 +40,7 @@
                 <td>{{event.startTime | date:"hh':'mm a"}} - {{event.endTime | date:"hh':'mm a"}}</td>
                 <td>
                   <button class="btn" style="display: block; margin:auto; background-color: green;border: solid 1px darkgreen;color:white" ng-click="$parent.requestEvent(event); menu=1" ng-show="menu==0">Request</button>
-                  <button class="btn" style="display: block; margin:auto; background-color: red;border: solid 1px firebrick;color:white" ng-click="$parent.deleteOrgRequest(event); menu=0" ng-show="menu==1">Cancel</button>
+                  <button class="btn" style="display: block; margin:auto; background-color: red;border: solid 1px firebrick;color:white" ng-click="$parent.deleteOrgRequestNoNote(event); menu=0" ng-show="menu==1">Cancel<br>Event<br>Request</button>
                 </td>
               </tr>
             </tbody>
