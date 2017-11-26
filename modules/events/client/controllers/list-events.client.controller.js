@@ -265,6 +265,11 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
       return dte.toISOString() > event.dateOfEvent;
     };
 
+    // Returns true if the user signed in is the same one who has the event accepted
+    $scope.filterAcceptedEvents = function (event) {
+      return event.organizationConfirmed === $scope.authentication.user.displayName;
+    };
+
     //Allows a business to create an event
     $scope.createEvent = function () {
       console.log($scope.name);
