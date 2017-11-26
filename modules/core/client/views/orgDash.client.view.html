@@ -1,23 +1,23 @@
-<div class="container-fluid">
+<div class="container-fluid" ng-controller="EventsListController">
     <div class="row" style="margin-top:5px">
         <!-- TABBED MENU -->
-        <div class="jumbotron" style="overflow:hidden;border-width:1px;border-color:black;border-style:solid">
           <div class="container-fluid">
-            <h1 style="text-align:center">Upcoming Events</h1>
+            <div class="dashboard-container">
+              <p class="dashboard-header">Dashboard</p>
 
             <!-- TABS -->
             <div class="row" style="justify-content: center">
               <ul class="nav nav-tabs">
-                <li class="active"><a class="nav-link org-menu-selects" ng-click="cal=0"style="color:#1B5689; cursor:pointer" ui-sref=".eventList">Requests</a></li>
-                <li><a class="org-menu-selects nav-link" ng-click="cal=1""; style="color:#1B5689; cursor:pointer" ui-sref = ".calendar">Calendar</a></li>
-                <li><a class="org-menu-selects nav-link" style="color:#1B5689; cursor:pointer" ui-sref = ".pastEvents">Past Events</a></li>
-                <li><a class="org-menu-selects nav-link" style="color:#1B5689; cursor:pointer" ui-sref = ".notifications">Notifications</a></li>
+                <li ng-class="{active : activeTab == 'requests'}"><a ng-click="setActiveTab('requests'); cal=0" class="nav-link org-menu-selects" style="color:#1B5689; cursor:pointer" ui-sref=".eventList">Requests</a></li>
+                <li ng-class="{active : activeTab == 'calendar'}"><a ng-click="setActiveTab('calendar'); cal=1" class="org-menu-selects nav-link" style="color:#1B5689; cursor:pointer" ui-sref=".calendar">Calendar</a></li>
+                <li ng-class="{active : activeTab == 'pastEvents'}"><a ng-click="setActiveTab('pastEvents')" class="org-menu-selects nav-link" style="color:#1B5689; cursor:pointer" ui-sref=".pastEvents">Past Events</a></li>
+                <li ng-class="{active : activeTab == 'notifications'}"><a ng-click="setActiveTab('notifications')" class="org-menu-selects nav-link" style="color:#1B5689; cursor:pointer" ui-sref = ".notifications">Notifications</a></li>
               </ul>
             </div>
 
-            <div>
-             <div ui-view></div>
-            </div>
+              <div>
+               <div ui-view></div>
+              </div>
 
             <!-- REQUEST EVENT BUTTON -->
             <div class="row" style="justify-content: center">
