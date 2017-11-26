@@ -1,42 +1,20 @@
 <!-- BIZ CREATE EVENT FORM -->
-<div class="container-fluid" style="background-color: #dddddd" ng-controller="createEventController">
-  <div class="row">
-    <div class="col-sm-2 col-2">
-    </div>
-    <div class="col-sm-8 col-8">
-      <div class="jumbotron" style="padding:5px;border-width:1px;border-color:black;border-style:solid">
-        <h1 style="text-align: center">Create Event</h1>
-        <div style="padding-bottom:2px">
-          <form>
-            <div class="form-group">
-              <label for="name">Event Name</label>
-              <input type="text" class="form-control" ng-model="name">
-            </div>
-            <div class="form-group">
-              <label for="location">Location</label>
-              <input type="text" class="form-control" ng-model="location">
-            </div>
-            <div class="form-group">
-              <label for="date">Event Date (Use dropdown arrow on the right to choose from calendar)</label>
-              <input type="date" class="form-control" ng-model="date">
-            </div>
-            <div class="form-group">
-              <label for="sTime">Event Start Time</label>
-              <input type="time" class="form-control" id="sTime" ng-model="sTime">
-            </div>
-            <div class="form-group">
-              <label for="eTime">Event End Time</label>
-              <input type="time" class="form-control" id="eTime" ng-model="eTime">
-            </div>
-            <div class="form-group">
-              <label for="requireTax">Require Tax ID?</label>
-              <input type="checkbox" id="requireTax" ng-model="requireTax">
-            </div>
-            <div class="form-group">
-              <label for="banner">Event Banner</label>
-              <input type="file" id="eventBanner" ng-model="banner">
-              <div class="form-group text-center">
-                <img ng-src="{{event.banner}}" alt="{{event.name}}" class="img-thumbnail user-event-picture">
+  <div class="container-fluid" style="background-color: #dddddd" ng-controller="createEventController">
+    <div class="row">
+      <div class="col-sm-2 col-2">
+      </div>
+      <div class="col-sm-8 col-8">
+        <div class="event-container">
+          <h1 style="text-align: center">Create Event</h1>
+          <div style="padding-bottom:2px">
+            <form>
+              <div class="form-group">
+                <label for="name">Event Name</label>
+                <input type="text" class="form-control" ng-model="name">
+              </div>
+              <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" class="form-control" ng-model="location">
               </div>
               <div class="text-center form-group" ng-hide="uploader.queue.length">
                 <span class="btn btn-default btn-file">Select New Image <input type="file" nv-file-select uploader="uploader"></span>
@@ -60,7 +38,4 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-2 col-2">
-    </div>
   </div>
-</div>
