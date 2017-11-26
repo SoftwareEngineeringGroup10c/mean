@@ -1,9 +1,34 @@
 'use strict';
 
-angular.module('core').controller('HomeController', ['$scope', '$window', '$state', '$http', 'Authentication',
-  function ($scope, $window, $state, $http, Authentication) {
+angular.module('core').controller('HomeController', ['$scope', '$compile', '$window', '$state', '$http', 'Authentication',
+  function ($scope, $compile, $window, $state, $http, Authentication) {
     // This provides Authentication context.
     $scope.authentication = Authentication;
+    $scope.events = [];
+
+    /* Render Tooltip */
+    $scope.eventRender = function (event, element, stick) {
+      element.attr({
+        'tooltip': event.title,
+        'tooltip-append-to-body': true
+      });
+      $compile(element)($scope);
+    };
+
+    $scope.uiConfig = {
+      calendar: {
+        defaultTimedEventDuration: '01:00:00',
+        height: 700,
+        editable: false,
+        header: {
+          left: 'title',
+          center: '',
+          right: 'today prev,next'
+        },
+
+        eventRender: $scope.eventRender
+      }
+    };
 
     //Initialize some variables
     $scope.editEvent_flag = 0;
@@ -54,6 +79,25 @@ angular.module('core').controller('HomeController', ['$scope', '$window', '$stat
       $scope.loadEventList();
     };
 
+    //Sends a delete request to remove a passed in event from the DB
+    $scope.deleteNotification = function (notification) {
+      if ($window.confirm('Are you sure you want to delete?')) {
+
+        $http({
+          method: 'DELETE',
+          url: 'api/notifications/' + notification._id
+        }).then(function (res) {
+          console.log('Successful delete');
+          $scope.loadNotificationList();
+        }, function (res) {
+          console.log('Failed delete');
+          $scope.loadNotificationList();
+        });
+      }
+
+      $scope.loadEventList();
+    };
+
     //Adds the organization name to the organizationsPending list
     $scope.requestEvent = function (event) {
       if (event.organizationsPending.indexOf($scope.authentication.user.displayName) === -1) {
@@ -61,6 +105,20 @@ angular.module('core').controller('HomeController', ['$scope', '$window', '$stat
       } else {
         return;
       }
+
+      $http({
+        method: 'POST',
+        url: 'api/notifications',
+        data: {
+          data: $scope.authentication.user.displayName + ' has requested an event on ' + event.dateOfEvent + ' that you created.',
+          userList: event.user.$soid
+        }
+      }).then(function (res) {
+        console.log('Successful notification');
+      }, function (res) {
+        console.log('Failed notification');
+      });
+
       $http({
         method: 'PUT',
         url: 'api/events/' + event._id,
@@ -97,9 +155,7 @@ angular.module('core').controller('HomeController', ['$scope', '$window', '$stat
         }
       }).then(function (res) {
         console.log('Successful accept');
-        console.log(index);
-        console.log($scope.globalEvent);
-        console.log($scope.globalEvent.organizationsPending[index]);
+
       }, function (res) {
         console.log('Failed accept');
         console.log(res);
@@ -119,6 +175,23 @@ angular.module('core').controller('HomeController', ['$scope', '$window', '$stat
     //Allows an organizations to delete their name from the event that is passed in
     $scope.deleteOrgRequest = function (event) {
       console.log(event.organizationsPending.splice(event.organizationsPending.indexOf($scope.authentication.user.displayName), 1));
+
+      if (event.organizationConfirmed === $scope.authentication.user.displayName) {
+        console.log(event);
+        $http({
+          method: 'POST',
+          url: 'api/notifications',
+          data: {
+            data: $scope.authentication.user.displayName + ' cancelled an event that was previously approved on ' + event.dateOfEvent,
+            userList: event.user.$oid
+          }
+        }).then(function (res) {
+          console.log('Successful notification');
+        }, function (res) {
+          console.log('Failed notification');
+        });
+      }
+
       var newConfirmed = event.organizationConfirmed;
       if (newConfirmed === $scope.authentication.user.displayName) {
         newConfirmed = '';
@@ -147,6 +220,23 @@ angular.module('core').controller('HomeController', ['$scope', '$window', '$stat
         console.log('Successful');
         console.log(res);
         $scope.eventList = res.data;
+
+
+      }, function (res) {
+        console.log('Failed');
+        console.log(res);
+      });
+    };
+
+    //Loads the events database list into the eventList scope variable
+    $scope.loadNotificationList = function () {
+      $http({
+        method: 'GET',
+        url: '/api/notifications'
+      }).then(function (res) {
+        console.log('Successful');
+        console.log(res);
+        $scope.notificationList = res.data;
       }, function (res) {
         console.log('Failed');
         console.log(res);
@@ -159,6 +249,10 @@ angular.module('core').controller('HomeController', ['$scope', '$window', '$stat
     //Checks if the event was made by the user
     $scope.filterByUser = function (event) {
       return event.user.displayName === $scope.authentication.user.displayName;
+    };
+
+    $scope.filterNotificationsByUser = function (notification) {
+      return notification.userList.indexOf($scope.authentication.user.displayName) >= 0 || notification.userList.indexOf($scope.authentication.user._id.$oid) >= 0;
     };
 
     //Checks if the user's name is in the organizationsPending list of an event
@@ -181,7 +275,8 @@ angular.module('core').controller('HomeController', ['$scope', '$window', '$stat
           startTime: $scope.sTime,
           endTime: $scope.eTime,
           location: $scope.location,
-          taxIdRequired: $scope.requireTax
+          taxIdRequired: $scope.requireTax,
+          hostOrg: $scope.authentication.user.displayName
         }
       }).then(function (res) {
         console.log('Successful event');
@@ -216,9 +311,64 @@ angular.module('core').controller('HomeController', ['$scope', '$window', '$stat
     $scope.refreshHandler = function () {
       console.log('refresh');
       if ($scope.authentication.user.roles.indexOf('Organization') >= 0) {
-        $state.go('home.orgDash.eventList');
+        $state.go('orgDash.eventList');
       }
     };
+
+    $scope.getCalEvents = function () {
+      var events = [];
+      $http({
+        method: 'GET',
+        url: '/api/events'
+      }).then(function (res) {
+        console.log('Successful');
+        console.log(res);
+        $scope.eventList = res.data;
+
+        for (var i = 0; i < res.data.length; i++) {
+          var temp = {};
+
+          // Extract the date from the dateOfEvent object
+          var dateEvent = new Date(res.data[i].dateOfEvent);
+          var timeEvent = new Date(res.data[i].startTime);
+          var month = dateEvent.getMonth();
+          var year = dateEvent.getFullYear();
+          var date = dateEvent.getDate();
+          var hours = timeEvent.getHours();
+
+          // Used for debugging
+          console.log('Month: ' + month);
+          console.log('Year: ' + year);
+          console.log('Date: ' + date);
+          console.log('Time: ' + hours);
+
+          temp.title = res.data[i].name;
+
+          // Format the date
+          temp.start = new Date(year, month, date, hours);
+
+          // Check to see if the user logged in is the same one who made the event
+          if ($scope.authentication.user.roles.indexOf('Organization') >= 0) {
+            events.push(temp);
+          }
+
+          else {
+            if (res.data[i].user.displayName === $scope.authentication.user.displayName) {
+              events.push(temp);
+            }
+          }
+        }
+
+      }, function (res) {
+        console.log('Failed');
+        console.log(res);
+      });
+
+      return events;
+
+    };
+
+    $scope.eventSources = [$scope.events, $scope.getCalEvents()];
 
   }
 ]);

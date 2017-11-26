@@ -39,10 +39,58 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
         status: 'Confirmed'
       }];
 
+    //Loads the events database list into the eventList scope variable
+    $scope.loadEventList = function () {
+      $http({
+        method: 'GET',
+        url: '/api/events'
+      }).then(function (res) {
+        console.log('Successful');
+        console.log(res);
+        $scope.eventList = res.data;
+      }, function (res) {
+        console.log('Failed');
+        console.log(res);
+      });
+    };
 
     //Sends a delete request to remove a passed in event from the DB
     $scope.deleteEvent = function (event) {
       if ($window.confirm('Are you sure you want to delete this event?')) {
+// <<<<<<< HEAD
+// =======
+
+        if (event.organizationsPending.length > 0) {
+          $http({
+            method: 'POST',
+            url: 'api/notifications',
+            data: {
+              data: $scope.authentication.user.displayName + ' has deleted an event on ' + event.dateOfEvent + ' that you requested.',
+              userList: event.organizationsPending
+            }
+          }).then(function (res) {
+            console.log('Successful notification');
+          }, function (res) {
+            console.log('Failed notification');
+          });
+        }
+
+        if (event.organizationConfirmed !== '') {
+          $http({
+            method: 'POST',
+            url: 'api/notifications',
+            data: {
+              data: $scope.authentication.user.displayName + ' has deleted an event on ' + event.dateOfEvent + ' that you were confirmed for.',
+              userList: event.organizationConfirmed
+            }
+          }).then(function (res) {
+            console.log('Successful notification');
+          }, function (res) {
+            console.log('Failed notification');
+          });
+        }
+
+// >>>>>>> 9df96041a6e40fad48399d281f05730e6dd8e306
 
         $http({
           method: 'DELETE',
@@ -64,6 +112,20 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
       } else {
         return;
       }
+
+      $http({
+        method: 'POST',
+        url: 'api/notifications',
+        data: {
+          data: $scope.authentication.user.displayName + ' has requested an event on ' + event.dateOfEvent + ' that you created.',
+          userList: event.user.displayName
+        }
+      }).then(function (res) {
+        console.log('Successful notification');
+      }, function (res) {
+        console.log('Failed notification');
+      });
+
       $http({
         method: 'PUT',
         url: 'api/events/' + event._id,
@@ -88,24 +150,44 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
     };
 
     //Allows a business to change the confirmed org based on it's index in the organizationsPending array
-    $scope.acceptEvent = function (index) {
-      if ($scope.globalEvent.organizationsPending.length === 0) {
+    $scope.acceptEvent = function (index, event) {
+      console.log('here');
+      var orgData;
+      if (event.organizationsPending.length === 0) {
         return;
       }
+      if (index === '') {
+        orgData = '';
+      } else {
+        orgData = event.organizationsPending[index];
+      }
+
       $http({
         method: 'PUT',
-        url: 'api/events/' + $scope.globalEvent._id,
+        url: 'api/events/' + event._id,
         data: {
-          organizationConfirmed: $scope.globalEvent.organizationsPending[index]
+          organizationConfirmed: orgData
         }
       }).then(function (res) {
         console.log('Successful accept');
         console.log(index);
-        console.log($scope.globalEvent);
-        console.log($scope.globalEvent.organizationsPending[index]);
+        $scope.loadEventList();
       }, function (res) {
         console.log('Failed accept');
         console.log(res);
+      });
+
+      $http({
+        method: 'POST',
+        url: 'api/notifications',
+        data: {
+          data: $scope.authentication.user.displayName + ' approved your request for an event on ' + event.dateOfEvent,
+          userList: orgData
+        }
+      }).then(function (res) {
+        console.log('Successful notification');
+      }, function (res) {
+        console.log('Failed notification');
       });
     };
 
@@ -121,6 +203,26 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
 
     //Allows an organizations to delete their name from the event that is passed in
     $scope.deleteOrgRequest = function (event) {
+// <<<<<<< HEAD
+// =======
+      console.log(event.organizationsPending.splice(event.organizationsPending.indexOf($scope.authentication.user.displayName), 1));
+
+      if (event.organizationConfirmed === $scope.authentication.user.displayName) {
+        console.log(event.user.displayName);
+        $http({
+          method: 'POST',
+          url: 'api/notifications',
+          data: {
+            data: $scope.authentication.user.displayName + ' cancelled an event that was previously approved on ' + event.dateOfEvent,
+            userList: event.user.displayName
+          }
+        }).then(function (res) {
+          console.log('Successful notification');
+        }, function (res) {
+          console.log('Failed notification');
+        });
+      }
+// >>>>>>> 9df96041a6e40fad48399d281f05730e6dd8e306
       var newConfirmed = event.organizationConfirmed;
 
       if ($window.confirm('Are you sure you want to cancel this request?')) {
@@ -130,6 +232,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
         if (newConfirmed === $scope.authentication.user.displayName) {
           newConfirmed = '';
         }
+// <<<<<<< HEAD
 
         $http({
           method: 'PUT',
@@ -146,21 +249,25 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
         });
       }
     };
+// =======
+// >>>>>>> 9df96041a6e40fad48399d281f05730e6dd8e306
 
-    //Loads the events database list into the eventList scope variable
-    $scope.loadEventList = function () {
-      $http({
-        method: 'GET',
-        url: '/api/events'
-      }).then(function (res) {
-        console.log('Successful');
-        console.log(res);
-        $scope.eventList = res.data;
-      }, function (res) {
-        console.log('Failed');
-        console.log(res);
-      });
-    };
+//         $http({
+//           method: 'PUT',
+//           url: 'api/events/' + event._id,
+//           data: {
+//             organizationsPending: event.organizationsPending.splice(event.organizationsPending.indexOf($scope.authentication.user.displayName), 1),
+//             organizationConfirmed: newConfirmed
+//           }
+//         }).then(function (res) {
+//           console.log('Successful org event delete');
+//         }, function (res) {
+//           console.log('Failed org event delete');
+//           console.log(res);
+//         });
+//       }
+//     };
+
 
     //Initially loading the events
     $scope.loadEventList();
@@ -173,6 +280,19 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
     //Checks if the user's name is in the organizationsPending list of an event
     $scope.filterOrgEvents = function (event) {
       return event.organizationsPending.indexOf($scope.authentication.user.displayName) !== -1;
+    };
+
+    // Checks if the date of the event has already passed or not
+    $scope.filterEventsDate = function (event) {
+      var dte = new Date();
+      console.log('Event Date: ' + event.dateOfEvent);
+      console.log('Current Date: ' + dte.toISOString());
+      return dte.toISOString() > event.dateOfEvent;
+    };
+
+    // Returns true if the user signed in is the same one who has the event accepted
+    $scope.filterAcceptedEvents = function (event) {
+      return event.organizationConfirmed === $scope.authentication.user.displayName;
     };
 
     //Allows a business to create an event
@@ -191,7 +311,12 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
           endTime: $scope.eTime,
           location: $scope.location,
           taxIdRequired: $scope.requireTax,
-          banner: $scope.banner
+// <<<<<<< HEAD
+//           banner: $scope.banner
+// =======
+          banner: $scope.banner,
+          hostOrg: $scope.authentication.user.displayName
+// >>>>>>> 6aefb63cf869995ff5e67027d6cf7c145bf28985
         }
       }).then(function (res) {
         console.log('Successful event');
@@ -221,6 +346,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
     $scope.setGlobalEvent = function (event) {
       console.log('setting event');
       $scope.globalEvent = event;
+      console.log($scope.globalEvent);
     };
 
     $scope.refreshHandler = function () {
