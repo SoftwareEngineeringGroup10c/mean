@@ -321,6 +321,9 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
       }
     };
 
+    $scope.toggleRequestMenuButton = function(){
+      
+    }
   }
 ]);
 

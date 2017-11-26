@@ -17,14 +17,15 @@
                 <th>Request Event</th>
               </tr>
             </thead>
-            <tbody ng-repeat="event in eventList | filter: query">
-              <tr ng-init="eventObj = event" ng-show = "$parent.displayOrgNonRequest(event)">
+            <tbody ng-repeat="event in eventList | filter: query" ng-init="menu = 0">
+              <tr ng-init="eventObj = event" ng-show = "::$parent.displayOrgNonRequest(event)">
                 <th>{{event.user.displayName}}</th>
                 <td>{{event.dateOfEvent | date:"MM'/'dd'/'yyyy"}}</td>
                 <td>{{event.location}}</td>
                 <td>{{event.startTime | date:"hh':'mm"}} - {{event.endTime | date:"hh':'mm"}}</td>
                 <td>
-                  <button class="btn" style="display: block; margin:auto; background-color: green;border: solid 1px darkgreen;color:white" ng-click="$parent.requestEvent(event)">Request</button>
+                  <button class="btn" style="display: block; margin:auto; background-color: green;border: solid 1px darkgreen;color:white" ng-click="$parent.requestEvent(event); menu=1" ng-show="menu==0">Request</button>
+                  <button class="btn" style="display: block; margin:auto; background-color: red;border: solid 1px firebrick;color:white" ng-click="$parent.deleteOrgRequest(event); menu=0" ng-show="menu==1">Cancel</button>
                 </td>
               </tr>
             </tbody>
