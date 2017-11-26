@@ -40,7 +40,7 @@
             <div class="radio" ng-repeat="org in event.organizationsPending">
               <label><input type="radio" name="orgRadio" ng-model = "$parent.index_accept" value={{$index}} >{{org}}</label>
             </div>
-            <div class="radio">
+            <div class="radio" ng-if="event.organizationsPending.length != 0">
               <label><input type="radio" name="orgRadio" ng-model = "$parent.index_accept" value="">No Organization</label>
             </div>
           </div>
