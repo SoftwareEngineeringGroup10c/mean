@@ -52,7 +52,7 @@
         <td>{{event.name}}</td>
         <td>{{event.organizationConfirmed}}</td>
         <td>
-          <button class="btn btn-success" style="text-align: center; display: inline-block; margin:auto; color:white" ng-click="$parent.setGlobalEvent(event)">Manage<br>Requests</button>
+          <button class="btn btn-success" style="text-align: center; display: inline-block; margin:auto; color:white" ng-click="$parent.acceptEvent(index_accept,event);$parent.loadEventList()">Manage<br>Requests</button>
           <button class="btn btn-warning" style="text-align: center; display: inline-block; margin:auto; color:white" ui-sref="events.edit({ eventId: event._id })">Edit<br>Event</button>
           <button class="btn btn-danger" style="text-align: center; display: inline-block; margin:auto; color:white" ng-click="deleteEvent(event);loadEventList()">Delete<br>Event</button>
         </td>
