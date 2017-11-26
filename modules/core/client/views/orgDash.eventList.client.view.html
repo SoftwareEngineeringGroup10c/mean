@@ -32,11 +32,11 @@
         </tr>
       </thead>
       <tbody ng-repeat="event in eventList | filter:query | orderBy:sortType:sortReverse">
-        <tr ng-show="$parent.filterOrgEvents(event)">
+        <tr ng-show="$parent.filterOrgEvents(event) && !filterEventsDate(event)">
           <th>{{event.user.displayName}}</th>
           <td>{{event.dateOfEvent | date:"MM'/'dd'/'yyyy"}}</td>
           <td>{{event.location}}</td>
-          <td>{{event.startTime | date:"hh':'mm"}} - {{event.endTime | date:"hh':'mm"}}</td>
+          <td>{{event.startTime | date:"hh':'mm a"}} - {{event.endTime | date:"hh':'mm a"}}</td>
           <td>{{generateStatus(event)}}
             <td>
               <button class="btn btn-danger" style="display: block; margin:auto" ng-click="deleteOrgRequest(event)">Cancel</button>
