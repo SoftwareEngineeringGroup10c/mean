@@ -32,18 +32,16 @@ var EventSchema = new Schema({
     type: String,
     required: 'Please enter a location for the event.'
   },
-  banner: {
+  hostOrg: {
     type: String,
-    default: 'modules/events/client/img/default_banner.jpg'
+    default: 'biz'
   },
-  /*organizationsPending: [{
-   organizationName: String
-   }],*/
   organizationsPending: {
     type: [String]
   },
   organizationConfirmed: {
-    type: String
+    type: String,
+    default: ''
   },
   taxIdRequired: {
     type: Boolean
@@ -55,6 +53,10 @@ var EventSchema = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'User'
+  },
+  banner: {
+    type: String,
+    default: '/modules/events/client/services/img/default_banner.jpg'
   }
 });
 

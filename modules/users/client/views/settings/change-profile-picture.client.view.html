@@ -3,24 +3,24 @@
     <form class="signin form-horizontal">
       <fieldset>
         <div class="form-group text-center">
-          <img ng-src="{{imageURL}}" alt="{{user.displayName}}" class="img-thumbnail user-profile-picture">
+          <img ng-src="{{eventURL}}" class="img-thumbnail user-event-picture">
         </div>
-        <div class="text-center form-group" ng-hide="uploader.queue.length">
+        <div class="text-center form-group" ng-hide="uploader2.queue.length">
           <span class="btn btn-default btn-file">
-              Select Image <input type="file" nv-file-select uploader="uploader">
+              Select Image <input type="file" nv-file-select uploader="uploader2">
           </span>
         </div>
-        <div class="text-center form-group" ng-show="uploader.queue.length">
-          <button class="btn btn-primary" ng-click="uploadProfilePicture();">Upload</button>
-          <button class="btn btn-default" ng-click="cancelUpload();">Cancel</button>
+        <div class="text-center form-group" ng-show="uploader2.queue.length">
+          <button class="btn btn-primary" ng-click="uploadEventPicture()">Upload</button>
+          <button class="btn btn-default" ng-click="cancelUploadEvent()">Cancel</button>
         </div>
-        <div ng-show="success" class="text-center text-success">
-          <strong>Profile Picture Changed Successfully</strong>
+        <div ng-show="success2" class="text-center text-success">
+          <strong>Event Banner Changed Successfully</strong>
         </div>
-        <div ng-show="error" class="text-center text-danger">
-          <strong ng-bind="error"></strong>
+        <div ng-show="error2" class="text-center text-danger">
+          <strong ng-bind="error2"></strong>
         </div>
       </fieldset>
-    </form>
+      </form>
   </div>
 </section>

@@ -6,6 +6,8 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Events = mongoose.model('Event'),
+  multer = require('multer'),
+  config = require(path.resolve('./config/config')),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
@@ -15,7 +17,8 @@ var path = require('path'),
 exports.create = function (req, res) {
   var event = new Events(req.body);
   event.user = req.user;
-
+  event.banner = event.user.eventImageURL;
+  
   event.save(function (err) {
     if (err) {
       return res.status(400).send({
@@ -92,6 +95,47 @@ exports.list = function (req, res) {
   });
 };
 
+exports.changeEventPicture = function (req, res) {
+  var user = req.user;
+  var event = req.event;
+  var message = null;
+  var upload = multer(config.uploads.profileUpload).single('newEventPicture');
+  var eventUploadFileFilter = require(path.resolve('./config/lib/multer')).eventUploadFileFilter;
+  // Filtering to upload only images
+  upload.fileFiler = eventUploadFileFilter;
+  if (user) {
+    upload(req, res, function (uploadError) {
+      if(uploadError) {
+        event.banner = user.eventImageURL;
+        return res.status(400).send({
+          message: 'Error occurred while uploading event banner'
+        });
+      } else {
+        event.banner = config.uploads.profileUpload.event + req.file.filename;
+
+        event.save(function (saveError) {
+          if (saveError) {
+            return res.status(400).send({
+              message: errorHandler.getErrorMessage(saveError)
+            });
+          } else {
+            req.login(user, function (err) {
+              if (err) {
+                res.status(400).send(err);
+              } else {
+                res.json(user);
+              }
+            });
+          }
+        });
+      }
+    });
+  } else {
+    res.status(400).send({
+      message: 'User is not signed in'
+    });
+  }
+};
 /**
  * Events middleware
  */
