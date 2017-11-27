@@ -25,7 +25,7 @@ angular.module('users').controller('ChangeProfilePictureController', ['$scope', 
 
     // Set file uploader image filter
     $scope.uploader2.filters.push({
-      name: 'imageFilter2',
+      name: 'imageFilter',
       fn: function (item, options) {
         var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
         return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
@@ -70,7 +70,7 @@ angular.module('users').controller('ChangeProfilePictureController', ['$scope', 
     };
     $scope.uploader2.onSuccessItem = function (fileItem, response, status, headers) {
       // Show success message
-      $scope.success2 = true;
+      $scope.success = true;
 
       // Populate user object
       $scope.user = Authentication.user = response;
@@ -92,7 +92,7 @@ angular.module('users').controller('ChangeProfilePictureController', ['$scope', 
       //$scope.cancelUploadProf();
       $scope.cancelUploadEvent();
       // Show error message
-      $scope.error2 = response.message;
+      $scope.error = response.message;
     };
 
     // Change user profile picture
@@ -106,7 +106,7 @@ angular.module('users').controller('ChangeProfilePictureController', ['$scope', 
 
     $scope.uploadEventPicture = function () {
       // Clear messages
-      $scope.success2 = $scope.error2 = null;
+      $scope.success = $scope.error = null;
 
       // Start upload
       $scope.uploader2.uploadAll();

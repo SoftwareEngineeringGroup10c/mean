@@ -3,12 +3,11 @@
 /**
  * Module dependencies
  */
-// var eventsPolicy = require('../policies/events.server.policy'),
-//   events = require('../controllers/events.server.controller');
+var eventsPolicy = require('../policies/events.server.policy'),
+  events = require('../controllers/events.server.controller');
 
 module.exports = function (app) {
-  var eventsPolicy = require('../policies/events.server.policy'),
-  events = require('../controllers/events.server.controller');
+
   // Events Routes
   app.route('/api/events').get(events.list)
     .post(events.create);

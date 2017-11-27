@@ -26,6 +26,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
     $scope.eTime = null;
     $scope.sTime = null;
     $scope.requireTax = null;
+    $scope.banner =  this.banner;
 
     $scope.acceptEvent_flag = 0;
 
@@ -282,6 +283,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
       //console.log($scope.date);
       //console.log($scope.sTime);
 
+
       $http({
         method: 'POST',
         url: '/api/events',
@@ -292,6 +294,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
           endTime: $scope.eTime,
           location: $scope.location,
           taxIdRequired: $scope.requireTax,
+          banner: $scope.banner,
           hostOrg: $scope.authentication.user.displayName
         }
       }).then(function (res) {
@@ -303,18 +306,6 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
         //console.log(date);
         //console.log(sTime);
       });
-      $http({
-          method: 'POST',
-          url: 'api/events/changeEventPicture',
-          data: {
-            banner: $scope.banner
-          }
-        }).then(function (res) {
-          console.log('Successful event image');
-        }, function (res) {
-          console.log('Failed event image');
-          console.log(res);
-        });
     };
 
     //Toggles the acceptEvent flag

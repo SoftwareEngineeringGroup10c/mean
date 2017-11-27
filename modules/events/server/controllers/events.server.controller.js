@@ -10,14 +10,14 @@ var path = require('path'),
   multer = require('multer'),
   config = require(path.resolve('./config/config')),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
-  _ = require('lodash'),
-  User = mongoose.model('User');
+  _ = require('lodash');
+  // User = mongoose.model('User');
 /**
  * Create a Events
  */
 exports.create = function (req, res) {
   var event = new Events(req.body);
-  // event.user = req.user;
+  event.user = req.user;
   event.banner = event.user.eventImageURL;
   
   event.save(function (err) {
@@ -98,7 +98,7 @@ exports.list = function (req, res) {
 
 exports.changeEventPicture = function (req, res) {
   var event = req.event;
-  var user = event.user;
+  var user = req.user;
   var message = null;
   var upload = multer(config.uploads.eventUpload).single('newEventPicture');
   var eventUploadFileFilter = require(path.resolve('./config/lib/multer')).eventUploadFileFilter;
