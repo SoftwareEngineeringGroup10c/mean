@@ -43,7 +43,7 @@ module.exports = {
       }
     },
     eventUpload: {
-      dest: './modules/events/client/services/img',
+      dest: './modules/events/client/services/img/',
       limits: {
         fileSize: 1 * 1024 * 1024 // Max file size in bytes (1 MB)
       }

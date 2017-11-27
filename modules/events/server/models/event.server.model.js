@@ -56,7 +56,7 @@ var EventSchema = new Schema({
   },
   banner: {
     type: String,
-    default: '{{User.eventImageURL}}'
+    default: './modules/events/client/services/img/default_banner.jpg'
   }
 });
 
