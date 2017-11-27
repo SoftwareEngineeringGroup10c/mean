@@ -33,10 +33,10 @@
     <form name="userForm" ng-submit="updateUserProfile(userForm.$valid)" class="login" novalidate autocomplete="off">
       <fieldset>
         <div class="form-group" show-errors>
-          <label for="organization">School Organization/Business Name</label>
+          <label for="organization">Student Organization/Business Name</label>
           <input type="text" id="organization" name="organization" readonly="readonly" class="form-control" ng-model="user.organization" placeholder="Organization/Business Name" required disabled>
           <div ng-messages="userForm.organization.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">An organization/business name is required.</p>
+            <p class="help-block error-text" ng-message="required">A student organization/business name is required.</p>
           </div>
         </div>
         <div class="form-group" show-errors>
