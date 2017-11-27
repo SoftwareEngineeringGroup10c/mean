@@ -27,8 +27,8 @@
             Time
             <span ng-show="sortType == 'startTime' && !sortReverse" class="fa fa-caret-down"></span>
           </a></th>
-          <th>Status</th>
-          <th>Event Settings</th>
+          <th><a href="#"> Status</a></th>
+          <th><a href="#"> Event Settings</a></th>
         </tr>
       </thead>
       <tbody ng-repeat="event in eventList | filter:query | orderBy:sortType:sortReverse">

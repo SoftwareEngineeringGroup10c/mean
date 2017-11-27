@@ -14,7 +14,7 @@
               <span ng-show="sortType == 'dateOfEvent' && !sortReverse" class="fa fa-caret-down"></span>
             </a>
           </th>
-          <th>Organizations Requesting</th>
+          <th><a href="#"> Organizations Requesting</a></th>
           <th><a href="#" ng-click="sortType = 'startTime'; sortReverse = !sortReverse">
             Time
             <span ng-show="sortType == 'startTime' && !sortReverse" class="fa fa-caret-down"></span>
@@ -28,14 +28,14 @@
             <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
           </a>
         </th>
-        <th>Accepted Organization</th>
-        <th>Event Settings</th>
+          <th><a href="#"> Accepted Organization</a></th>
+          <th><a href="#"> Event Settings</a></th>
       </tr>
       </thead>
       <tbody ng-repeat="event in eventList | filter: query | orderBy:sortType:sortReverse">
 
       <tr ng-if="filterByUser(event) && !filterEventsDate(event)">
-        
+
         <td>{{event.dateOfEvent | date:"MM'/'dd'/'yyyy"}}</td>
         <td>
           <div style="max-height:75px;overflow-y: auto">
