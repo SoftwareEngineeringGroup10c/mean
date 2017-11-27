@@ -12,3 +12,11 @@
   font-size: 35px;
   text-align: center;
 }
+
+.event-picture {
+  max-height: 262px;
+  max-width: 500px;
+  /*min-height: 262px;
+  min-width: 500px;*/
+  overflow: hidden;
+}
