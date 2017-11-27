@@ -50,12 +50,11 @@
         </div>
         <div class="form-group">
           <label class="control-label" for="banner">Event Banner</label>
-          <input name="banner" id="eventBanner" ng-model="vm.event.banner">
           <div class="form-group text-center">
-            <img ng-src="{{vm.event.banner}}" alt="{{vm.event.name}}" class="img-thumbnail user-event-picture">
+            <img ng-src="{{vm.event.banner}}" alt="{{vm.event.name}}" class="img-thumbnail event-picture">
           </div>
           <div class="text-center form-group" ng-hide="vm.uploader.queue.length">
-            <span class="btn btn-default btn-file">Select New Image <input type="file" nv-file-select uploader="vm.uploader"></span>
+            <span class="btn btn-default btn-file">Select New Image <input name="banner" id="eventBanner" ng-model="vm.event.banner" type="file" nv-file-select uploader="vm.uploader"></span>
           </div>
           <div class="text-center form-group" ng-show="vm.uploader.queue.length">
             <button class="btn btn-primary" ng-click="vm.uploadEventPicture()">Upload</button>

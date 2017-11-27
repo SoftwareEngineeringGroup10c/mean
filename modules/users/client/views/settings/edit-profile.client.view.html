@@ -2,7 +2,7 @@
 
 <div class="settings-column" ng-controller="ChangeProfilePictureController">
   <div class="col-xs-offset-1 col-xs-4 col-md-offset-1 col-md-4">
-    <form class="login form-horizontal">
+    <form class="signin form-horizontal">
       <fieldset>
         <div class="form-group text-center">
           <img ng-src="{{imageURL}}" alt="{{user.displayName}}" class="img-thumbnail user-profile-picture">
@@ -26,7 +26,6 @@
     </form>
   </div>
 </div>
-
 <div class="settings-column"  ng-controller="EditProfileController">
   <div class="col-xs-offset-5 col-xs-5 col-md-offset-5 col-md-5">
     <form name="userForm" ng-submit="updateUserProfile(userForm.$valid)" class="login" novalidate autocomplete="off">

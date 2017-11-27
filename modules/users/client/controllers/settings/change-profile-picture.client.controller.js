@@ -10,6 +10,10 @@ angular.module('users').controller('ChangeProfilePictureController', ['$scope', 
       url: 'api/users/picture',
       alias: 'newProfilePicture'
     });
+    $scope.uploader2 = new FileUploader({
+      url: 'api/users/eventBanner',
+      alias: 'newEventPicture'
+    });
     // Set file uploader image filter
     $scope.uploader.filters.push({
       name: 'imageFilter',
@@ -18,13 +22,10 @@ angular.module('users').controller('ChangeProfilePictureController', ['$scope', 
         return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
       }
     });
-    $scope.uploader2 = new FileUploader({
-      url: 'api/users/eventBanner',
-      alias: 'newEventPicture'
-    });
+
     // Set file uploader image filter
     $scope.uploader2.filters.push({
-      name: 'imageFilter',
+      name: 'imageFilter2',
       fn: function (item, options) {
         var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
         return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
@@ -117,7 +118,7 @@ angular.module('users').controller('ChangeProfilePictureController', ['$scope', 
       $scope.imageURL = $scope.user.profileImageURL;
     };
     $scope.cancelUploadEvent = function () {
-      $scope.uploader.clearQueue();
+      $scope.uploader2.clearQueue();
       $scope.eventURL = $scope.user.eventImageURL;
     };
   }

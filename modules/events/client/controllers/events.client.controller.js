@@ -8,7 +8,7 @@
 
   EventsController.$inject = ['$scope', '$timeout', '$state', '$window', 'Authentication', 'FileUploader', 'eventResolve'];
 
-  function EventsController ($scope, $timeout, $state, $window, Authentication, FileUploader, event) {
+  function EventsController ($scope, $timeout, $state, $window, Authentication, FileUploader, eventResolve) {
     var vm = this;
 
     vm.authentication = Authentication;
