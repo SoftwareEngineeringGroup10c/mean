@@ -26,6 +26,17 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
     $scope.eTime = null;
     $scope.sTime = null;
     $scope.requireTax = null;
+    $scope.banner =  null;
+
+    $http({
+          method: 'GET',
+          url: 'api/users/' + event.user._id
+        }).then(function (res) {
+          $scope.banner = res.eventImageURL;
+          console.log('Successful banner');
+        }, function (res) {
+          console.log('Failed banner');
+        });
 
     $scope.acceptEvent_flag = 0;
 
@@ -66,9 +77,6 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
     //Sends a delete request to remove a passed in event from the DB
     $scope.deleteEvent = function (event) {
       if ($window.confirm('Are you sure you want to delete this event?')) {
-// <<<<<<< HEAD
-// =======
-
         if (event.organizationsPending.length > 0) {
           $http({
             method: 'POST',
@@ -98,8 +106,6 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
             console.log('Failed notification');
           });
         }
-
-// >>>>>>> 9df96041a6e40fad48399d281f05730e6dd8e306
 
         $http({
           method: 'DELETE',
@@ -221,9 +227,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
 
     //Allows an organizations to delete their name from the event that is passed in
     $scope.deleteOrgRequest = function (event) {
-// <<<<<<< HEAD
-// =======
-      //console.log(event.organizationsPending.splice(event.organizationsPending.indexOf($scope.authentication.user.displayName), 1));
+      console.log(event.organizationsPending.splice(event.organizationsPending.indexOf($scope.authentication.user.displayName), 1));
 
       var newConfirmed = event.organizationConfirmed;
 
@@ -306,7 +310,6 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
       });
     };
 
-
     //Initially loading the events
     $scope.loadEventList();
 
@@ -339,6 +342,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
       //console.log($scope.date);
       //console.log($scope.sTime);
 
+
       $http({
         method: 'POST',
         url: '/api/events',
@@ -361,13 +365,6 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
         //console.log(date);
         //console.log(sTime);
       });
-
-      /*$scope.name = null;
-       $scope.date = null;
-       $scope.sTime = null;
-       $scope.eTime = null;
-       $scope.location = null;
-       $scope.requireTax = null;*/
     };
 
     //Toggles the acceptEvent flag

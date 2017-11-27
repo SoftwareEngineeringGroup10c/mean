@@ -4,20 +4,21 @@
  * Module dependencies.
  */
 var path = require('path'),
+  fs = require('fs'),
   mongoose = require('mongoose'),
   Events = mongoose.model('Event'),
   multer = require('multer'),
   config = require(path.resolve('./config/config')),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
-
+  // User = mongoose.model('User');
 /**
  * Create a Events
  */
 exports.create = function (req, res) {
   var event = new Events(req.body);
   event.user = req.user;
-  event.banner = event.user.eventImageURL;
+  event.banner = event.hostOrg.eventImageURL;
   
   event.save(function (err) {
     if (err) {
@@ -45,7 +46,7 @@ exports.read = function (req, res) {
 };
 
 /**
- * Update a Events
+ * Update an Events
  */
 exports.update = function (req, res) {
   var event = req.event;
@@ -96,22 +97,22 @@ exports.list = function (req, res) {
 };
 
 exports.changeEventPicture = function (req, res) {
-  var user = req.user;
   var event = req.event;
+  var user = req.user;
   var message = null;
-  var upload = multer(config.uploads.profileUpload).single('newEventPicture');
+  var upload = multer(config.uploads.eventUpload).single('newEventPicture');
   var eventUploadFileFilter = require(path.resolve('./config/lib/multer')).eventUploadFileFilter;
   // Filtering to upload only images
   upload.fileFiler = eventUploadFileFilter;
   if (user) {
     upload(req, res, function (uploadError) {
       if(uploadError) {
-        event.banner = user.eventImageURL;
+        // event.banner = user.eventImageURL;
         return res.status(400).send({
           message: 'Error occurred while uploading event banner'
         });
       } else {
-        event.banner = config.uploads.profileUpload.event + req.file.filename;
+        event.banner = config.uploads.eventUpload.dest + req.file.filename;
 
         event.save(function (saveError) {
           if (saveError) {
