@@ -4,6 +4,7 @@
     <form class="login form-horizontal">
       <fieldset>
         <div class="form-group text-center">
+            <p>Change Profile Picture</p>
           <img ng-src="{{imageURL}}" alt="{{user.displayName}}" class="img-thumbnail user-profile-picture">
         </div>
         <div class="text-center form-group" ng-hide="uploader.queue.length">
@@ -31,7 +32,7 @@
     <form name="userForm" ng-submit="updateUserProfile(userForm.$valid)" class="login" novalidate autocomplete="off">
       <fieldset>
         <div class="form-group" show-errors>
-          <label for="organization">Organization/Business Name</label>
+          <label for="organization">School Organization/Business Name</label>
           <input type="text" id="organization" name="organization" readonly="readonly" class="form-control" ng-model="user.organization" placeholder="Organization/Business Name" required disabled>
           <div ng-messages="userForm.organization.$error" role="alert">
             <p class="help-block error-text" ng-message="required">An organization/business name is required.</p>
