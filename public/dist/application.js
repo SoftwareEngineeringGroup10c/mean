@@ -1899,7 +1899,7 @@ angular.module('users').controller('ChangeProfilePictureController', ['$scope', 
       }
     });
    $scope.uploader2 = new FileUploader({
-      url: 'api/users/picture',
+      url: 'api/users/eventbanner',
       alias: 'newEventPicture'
     });
     // Set file uploader image filter

@@ -7,6 +7,7 @@ var eventsPolicy = require('../policies/events.server.policy'),
   events = require('../controllers/events.server.controller');
 
 module.exports = function (app) {
+
   // Events Routes
   app.route('/api/events').get(events.list)
     .post(events.create);
