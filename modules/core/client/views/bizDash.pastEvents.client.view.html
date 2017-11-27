@@ -27,10 +27,9 @@
             <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
           </a>
           </th>
-          <th></th>
         </tr>
         </thead>
-        <tbody ng-repeat="event in eventList | orderBy:sortType:sortReverse">
+        <tbody ng-repeat="event in eventList | filter: query | orderBy:sortType:sortReverse">
         <tr ng-if="filterByUser(event) && filterEventsDate(event)">
           <td>{{event.dateOfEvent | date:"MM'/'dd'/'yyyy"}}</td>
           <td>{{event.startTime | date:"hh':'mm a"}} - {{event.endTime | date:"hh':'mm a"}}</td>
