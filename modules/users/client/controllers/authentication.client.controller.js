@@ -26,6 +26,8 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
         // If successful we assign the response to the global user model
         $scope.authentication.user = response;
 
+        console.log($scope.authentication.user);
+
         // And redirect to the previous or home page
         if ($scope.authentication.user.roles.indexOf('Organization') >= 0) {
           $state.go('orgDash.eventList');
@@ -53,7 +55,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$stat
         // If successful we assign the response to the global user model
         $scope.authentication.user = response;
         //$scope.signedIn = 1;
-
+        console.log($scope.authentication.user.roles.indexOf('Organization'));
         // And redirect to the previous or home page
         if ($scope.authentication.user.roles.indexOf('Organization') >= 0) {
           $state.go('orgDash.eventList');

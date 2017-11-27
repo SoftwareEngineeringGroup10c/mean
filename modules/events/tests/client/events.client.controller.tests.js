@@ -54,7 +54,7 @@
 
       // Mock logged in user
       Authentication.user = {
-        roles: ['user']
+        roles: ['Business']
       };
 
       // Initialize the Events controller.
@@ -73,7 +73,11 @@
       beforeEach(function () {
         // Create a sample Event object
         sampleEventPostData = new EventsService({
-          name: 'Event Name'
+          name: 'Event Name',
+          dateOfEvent: '2017-01-01T00:00:00.000Z',
+          startTime: '4:00',
+          endTime: '5:00',
+          location: 'Here'
         });
 
         $scope.vm.event = sampleEventPostData;
@@ -88,7 +92,7 @@
         $httpBackend.flush();
 
         // Test URL redirection after the Event was created
-        expect($state.go).toHaveBeenCalledWith('events.view', {
+        expect($state.go).toHaveBeenCalledWith('bizDash.eventList', {
           eventId: mockEvent._id
         });
       }));
@@ -121,7 +125,7 @@
         $httpBackend.flush();
 
         // Test URL location to new object
-        expect($state.go).toHaveBeenCalledWith('events.view', {
+        expect($state.go).toHaveBeenCalledWith('bizDash.eventList', {
           eventId: mockEvent._id
         });
       }));
@@ -139,32 +143,32 @@
       }));
     });
 
-    describe('vm.remove()', function () {
-      beforeEach(function () {
-        // Setup Events
-        $scope.vm.event = mockEvent;
-      });
-
-      it('should delete the Event and redirect to Events', function () {
-        // Return true on confirm message
-        spyOn(window, 'confirm').and.returnValue(true);
-
-        $httpBackend.expectDELETE(/api\/events\/([0-9a-fA-F]{24})$/).respond(204);
-
-        $scope.vm.remove();
-        $httpBackend.flush();
-
-        expect($state.go).toHaveBeenCalledWith('events.list');
-      });
-
-      it('should should not delete the Event and not redirect', function () {
-        // Return false on confirm message
-        spyOn(window, 'confirm').and.returnValue(false);
-
-        $scope.vm.remove();
-
-        expect($state.go).not.toHaveBeenCalled();
-      });
-    });
+    // describe('vm.remove()', function () {
+    //   beforeEach(function () {
+    //     // Setup Events
+    //     $scope.vm.event = mockEvent;
+    //   });
+    //
+    //   it('should delete the Event and redirect to Events', function () {
+    //     // Return true on confirm message
+    //     spyOn(window, 'confirm').and.returnValue(true);
+    //
+    //     $httpBackend.expectDELETE(/api\/events\/([0-9a-fA-F]{24})$/).respond(204);
+    //
+    //     $scope.vm.remove();
+    //     $httpBackend.flush();
+    //
+    //     expect($state.go).toHaveBeenCalledWith('events.list');
+    //   });
+    //
+    //   it('should should not delete the Event and not redirect', function () {
+    //     // Return false on confirm message
+    //     spyOn(window, 'confirm').and.returnValue(false);
+    //
+    //     $scope.vm.remove();
+    //
+    //     expect($state.go).not.toHaveBeenCalled();
+    //   });
+    // });
   });
 }());

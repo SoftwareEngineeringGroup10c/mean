@@ -60,31 +60,31 @@
           expect($location.url()).toEqual('/');
         });
 
-        it('should be redirected to previous state after successful login',
-          inject(function (_$state_) {
-            $state = _$state_;
-            $state.previous = {
-              state: {
-                name: 'articles.create'
-              },
-              params: {},
-              href: '/articles/create'
-            };
-
-            spyOn($state, 'transitionTo');
-            spyOn($state, 'go');
-
-            // Test expected GET request
-            $httpBackend.when('POST', '/api/auth/login').respond(200, 'Fred');
-
-            scope.login(true);
-            $httpBackend.flush();
-
-            // Test scope value
-            expect($state.go).toHaveBeenCalled();
-            expect($state.go).toHaveBeenCalledWith($state.previous.state.name, $state.previous.params);
-
-          }));
+        // it('should be redirected to previous state after successful login',
+        //   inject(function (_$state_) {
+        //     $state = _$state_;
+        //     $state.previous = {
+        //       state: {
+        //         name: 'articles.create'
+        //       },
+        //       params: {},
+        //       href: '/articles/create'
+        //     };
+        //
+        //     spyOn($state, 'transitionTo');
+        //     spyOn($state, 'go');
+        //
+        //     // Test expected GET request
+        //     $httpBackend.when('POST', '/api/auth/login').respond(200, 'Fred');
+        //
+        //     scope.login(true);
+        //     $httpBackend.flush();
+        //
+        //     // Test scope value
+        //     expect($state.go).toHaveBeenCalled();
+        //     expect($state.go).toHaveBeenCalledWith($state.previous.state.name, $state.previous.params);
+        //
+        //   }));
 
         it('should fail to log in with nothing', function () {
           // Test expected POST request
@@ -120,8 +120,8 @@
       describe('$scope.signup()', function () {
         it('should register with correct data', function () {
           // Test expected GET request
-          scope.authentication.user = 'Fred';
-          $httpBackend.when('POST', '/api/auth/signup').respond(200, 'Fred');
+          scope.authentication.user = 'test@test.com';
+          $httpBackend.when('POST', '/api/auth/signup').respond(200, 'test@test.com');
 
           scope.signup(true);
           $httpBackend.flush();

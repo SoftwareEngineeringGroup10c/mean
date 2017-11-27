@@ -50,11 +50,15 @@
       mockEvent = new EventsService({
         _id: '525a8422f6d0f87f0e407a33',
         name: 'Event Name'
-      });
+        // dateOfEvent: '2017-01-01T00:00:00.000Z',
+        // startTime: '4:00',
+        // endTime: '5:00',
+        // location: 'Here'
+        });
 
       // Mock logged in user
       Authentication.user = {
-        roles: ['user']
+        roles: ['Business', 'Organization', 'guest']
       };
 
       // Initialize the Events List controller.
@@ -75,7 +79,7 @@
 
       it('should send a GET request and return all Events', inject(function (EventsService) {
         // Set POST response
-        $httpBackend.expectGET('api/events').respond(mockEventList);
+        $httpBackend.expectGET('/api/events').respond(mockEventList);
 
 
         $httpBackend.flush();
