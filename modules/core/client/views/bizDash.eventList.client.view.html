@@ -14,7 +14,7 @@
               <span ng-show="sortType == 'dateOfEvent' && !sortReverse" class="fa fa-caret-down"></span>
             </a>
           </th>
-          <th>Organizations Requesting</th>
+          <th><a href="#"> Organizations Requesting</a></th>
           <th><a href="#" ng-click="sortType = 'startTime'; sortReverse = !sortReverse">
             Time
             <span ng-show="sortType == 'startTime' && !sortReverse" class="fa fa-caret-down"></span>
@@ -28,22 +28,19 @@
             <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
           </a>
         </th>
-        <th>Accepted Organization</th>
-        <th>Event Settings</th>
+          <th><a href="#"> Accepted Organization</a></th>
+          <th><a href="#"> Event Settings</a></th>
       </tr>
       </thead>
       <tbody ng-repeat="event in eventList | filter: query | orderBy:sortType:sortReverse">
 
       <tr ng-if="filterByUser(event) && !filterEventsDate(event)">
-        
+
         <td>{{event.dateOfEvent | date:"MM'/'dd'/'yyyy"}}</td>
         <td>
           <div style="max-height:75px;overflow-y: auto">
             <div class="radio" ng-repeat="org in event.organizationsPending">
               <label><input type="radio" name="orgRadio" ng-model = "$parent.index_accept" value={{$index}} >{{org}}</label>
-            </div>
-            <div class="radio" ng-if="event.organizationsPending.length != 0">
-              <label><input type="radio" name="orgRadio" ng-model = "$parent.index_accept" value="">No Organization</label>
             </div>
           </div>
         </td>
@@ -52,8 +49,8 @@
         <td>{{event.name}}</td>
         <td>{{event.organizationConfirmed}}</td>
         <td>
-          <button class="btn btn-success" style="text-align: center; display: inline-block; margin:auto; color:white" ng-click="$parent.acceptEvent(index_accept,event);$parent.loadEventList()">Manage<br>Requests</button>
-          <button class="btn btn-warning" style="text-align: center; display: inline-block; margin:auto; color:white" ui-sref="events.edit({ eventId: event._id })">Edit<br>Event</button>
+          <button class="btn btn-success" style="text-align: center; display: inline-block; margin:auto; color:white" ng-class="getButtonStyle(event)" ng-disabled="getButtonStyle(event)" ng-click="$parent.acceptEvent(index_accept,event);$parent.loadEventList()">Accept<br>Requests</button>
+          <button class="btn btn-warning" style="text-align: center; display: inline-block; margin:auto; color:white" ng-class="getButtonStyle(event)" ng-disabled="getButtonStyle(event)" ui-sref="events.edit({ eventId: event._id })">Edit<br>Event</button>
           <button class="btn btn-danger" style="text-align: center; display: inline-block; margin:auto; color:white" ng-click="deleteEvent(event);loadEventList()">Delete<br>Event</button>
         </td>
       </tr>

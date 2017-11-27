@@ -1,5 +1,5 @@
 <body>
-<section ng-controller="HomeController" ng-init="refreshHandler()">
+<section ng-controller="HomeController">
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
@@ -22,7 +22,28 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
-  <div ui-view>
+  <div class="container-fluid dashboard-container">
+    <div class="row">
+      <div class="col-sm-6" style="justify-content: center">
+        <h2 style="text-align: center">Student Organizations Can...</h2>
+        <ul>
+          <li>Register with Agora fundraising to connect with local businesses to organize fundraising events</li>
+          <li>Search for events based on location, time, and business</li>
+          <li>Find the perfect venue for their next fundraiser!</li>
+        </ul>
+      </div>
+      <div class="col-sm-6" style="justify-content: center">
+        <h2 style="text-align: center">Businesses Can...</h2>
+        <ul>
+          <li>Register an account with Agora Fundraising to make themselves availible to student orgaizations</li>
+          <li>Work with them to boost sales through holding various fundraising opportunities.</li>
+          <li>Give back to their community by helping local students.</li>
+        </ul>
+      </div>
     </div>
+    <div class="row" style="justify-content: center">
+      <h2 style="text-align: center">Want to know more? <a ui-sref="faq">Click here for more information.</a> <a ui-sref="authentication.signup">Click here to sign up.</a></h2>
+    </div>
+</div>
 </section>
 </body>
