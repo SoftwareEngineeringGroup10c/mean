@@ -18,7 +18,7 @@ var path = require('path'),
 exports.create = function (req, res) {
   var event = new Events(req.body);
   event.user = req.user;
-  event.banner = event.user.eventImageURL;
+  event.banner = event.hostOrg.eventImageURL;
   
   event.save(function (err) {
     if (err) {

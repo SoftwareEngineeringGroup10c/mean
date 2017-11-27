@@ -32,12 +32,17 @@ module.exports = {
   uploads: {
     profileUpload: {
       dest: './modules/users/client/services/img/profile/', // Profile upload destination path
-      event: './modules/users/client/services/img/',
       limits: {
         fileSize: 1 * 1024 * 1024 // Max file size in bytes (1 MB)
       }
     },
-    eventUploads: {
+    defaultEvent: {
+      dest: './modules/users/client/services/img/event/',
+      limits: {
+        fileSize: 1 * 1024 * 1024 // Max file size in bytes (1 MB)
+      }
+    },
+    eventUpload: {
       dest: './modules/events/client/services/img',
       limits: {
         fileSize: 1 * 1024 * 1024 // Max file size in bytes (1 MB)
