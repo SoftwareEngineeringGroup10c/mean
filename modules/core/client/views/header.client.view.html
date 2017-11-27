@@ -1,7 +1,7 @@
  <section ng-controller="HeaderController">
   <nav class="navbar-collapse navbar-light navbar-fixed-top" style="background-color: #1B5689;" collapse="!isCollapsed" role="navigation">
     <a style="cursor: pointer" ng-click="logoRedirect()" class="navbar-brand" style="color:white;text-shadow:none">
-      <img src="modules\core\client\img\logo_white_png_small.png" alt="logo" width="133px" height="30px" ng-click="logoRedirect()">
+      <img src="modules\core\client\img\logo_white_png_small.png" alt="logo" width="133px" height="30px" ui-sref="home">
     </a>
     <ul class="nav navbar-nav navbar-right" ng-hide="authentication.user">
       <li class="nav-item">
