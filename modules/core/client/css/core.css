@@ -238,3 +238,6 @@ h1, h2, th, label {
     mix-blend-mode: hard-light;
 }
 
+#buttonStyle{
+    color:blue;
+}
