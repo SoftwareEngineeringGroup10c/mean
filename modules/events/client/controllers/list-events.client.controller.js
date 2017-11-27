@@ -250,7 +250,6 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
       }
     };
 
-
     //Initially loading the events
     $scope.loadEventList();
 
