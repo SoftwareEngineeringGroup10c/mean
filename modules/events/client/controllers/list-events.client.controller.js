@@ -28,15 +28,15 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
     $scope.requireTax = null;
     $scope.banner =  null;
 
-    $http({
-          method: 'GET',
-          url: 'api/users/' + event.user._id
-        }).then(function (res) {
-          $scope.banner = res.eventImageURL;
-          console.log('Successful banner');
-        }, function (res) {
-          console.log('Failed banner');
-        });
+    // $http({
+    //       method: 'GET',
+    //       url: 'api/users/' + event.user._id
+    //     }).then(function (res) {
+    //       $scope.banner = res.eventImageURL;
+    //       console.log('Successful banner');
+    //     }, function (res) {
+    //       console.log('Failed banner');
+    //     });
 
     $scope.acceptEvent_flag = 0;
 
@@ -389,4 +389,3 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
 
   }
 ]);
-
