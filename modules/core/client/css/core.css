@@ -162,7 +162,7 @@ a.button:focus {
 
 .landing-page-overlay {
   z-index: 37;
-  background-color: rgba(249, 249, 249, 0.55);
+  background-color: rgba(249, 249, 249, 0.15);
   height: 100%;
 }
 
