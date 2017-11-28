@@ -324,7 +324,9 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
 
     //Checks if the event was made by the user
     $scope.filterByUser = function (event) {
-      return event.user.displayName === $scope.authentication.user.displayName;
+      console.log($scope.authentication.user);
+      console.log(event.hostOrg);
+      return event.hostOrg === $scope.authentication.user.displayName;
     };
 
     //Checks if the user's name is in the organizationsPending list of an event
