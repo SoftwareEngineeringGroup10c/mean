@@ -49,7 +49,7 @@
         <td>{{event.name}}</td>
         <td>{{event.organizationConfirmed}}</td>
         <td>
-          <button id="buttonStyle" class="btn btn-success" style="text-align: center; display: inline-block; margin:auto; color:white" ng-class="getButtonStyle(event)" ng-disabled="getButtonStyle(event)" ng-click="$parent.acceptEvent(index_accept,event);$parent.loadEventList()">Accept<br>Requests</button>
+          <button id="buttonStyle" class="btn btn-success" style="text-align: center; display: inline-block; margin:auto; color:white" ng-class="getButtonStyle(event) || getButtonStyle_two(event)" ng-disabled="getButtonStyle(event) || getButtonStyle_two(event)" ng-click="$parent.acceptEvent(index_accept,event);$parent.loadEventList()">Accept<br>Requests</button>
           <button id="buttonStyle" class="btn btn-warning" style="text-align: center; display: inline-block; margin:auto; color:white" ng-class="getButtonStyle(event)" ng-disabled="getButtonStyle(event)" ui-sref="events.edit({ eventId: event._id })">Edit<br>Event</button>
           <button id="buttonStyle"  class="btn btn-danger" style="text-align: center; display: inline-block; margin:auto; color:white" ng-click="deleteEvent(event);loadEventList()">Delete<br>Event</button>
         </td>

@@ -248,7 +248,7 @@ angular.module('core').controller('HomeController', ['$scope', '$compile', '$win
 
     //Checks if the event was made by the user
     $scope.filterByUser = function (event) {
-      return event.user.displayName === $scope.authentication.user.displayName;
+      return event.hostOrg === $scope.authentication.user.displayName;
     };
 
     $scope.filterNotificationsByUser = function (notification) {
@@ -354,10 +354,8 @@ angular.module('core').controller('HomeController', ['$scope', '$compile', '$win
             events.push(temp);
           }
 
-          else {
-            if ($scope.authentication.user.roles.indexOf('Business') >= 0 && res.data[i].user.displayName === $scope.authentication.user.displayName) {
-              events.push(temp);
-            }
+          else if ($scope.authentication.user.roles.indexOf('Business') >= 0 && res.data[i].hostOrg === $scope.authentication.user.displayName) {
+            events.push(temp);
           }
         }
 
