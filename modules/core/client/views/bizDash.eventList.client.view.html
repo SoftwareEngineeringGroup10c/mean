@@ -43,6 +43,9 @@
               <label><input type="radio" name="orgRadio" ng-model = "$parent.index_accept" value={{$index}} >{{org}}</label>
             </div>
           </div>
+          <div style="max-height:75px;overflow-y: auto" ng-show="getButtonStyle(event) || getButtonStyle_two(event)">
+            N/A
+          </div>
         </td>
         <td>{{event.startTime | date:"hh':'mm a"}} - {{event.endTime | date:"hh':'mm a"}}</td>
         <td>{{event.location}}</td>
