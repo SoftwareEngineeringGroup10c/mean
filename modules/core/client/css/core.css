@@ -150,6 +150,28 @@ a.button:focus {
   margin-bottom: 50px;
 }
 
+.landing-page-hero {
+  position: fixed;
+  height: 60%;
+  width: 100%;
+  top: 50px;
+  left: 0px;
+  background-size: cover;
+  background-image: url('https://fthmb.tqn.com/NHWKMH-5vkjiR1A1w9Iz65YQjP4=/2122x1415/filters:fill(auto,1)/GettyImages-168358829-5720cee95f9b58857d230c84.jpg');
+}
+
+.landing-page-overlay {
+  z-index: 37;
+  background-color: rgba(249, 249, 249, 0.90);
+  height: 100%;
+}
+
+.landing-page-overlay-text {
+  color: #F5A623;
+  text-align: center;
+
+}
+
 .dashboard-header {
   font-weight: bold;
   font-size: 35px;
