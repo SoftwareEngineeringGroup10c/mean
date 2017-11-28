@@ -72,7 +72,7 @@ var UserSchema = new Schema({
   },
   eventImageURL: {
     type: String,
-    default: './modules/users/client/services/img/default_banner.png'
+    default: './modules/users/client/services/img/event/default_banner.png'
   },
   provider: {
     type: String,

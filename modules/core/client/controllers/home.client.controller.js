@@ -276,6 +276,7 @@ angular.module('core').controller('HomeController', ['$scope', '$compile', '$win
           endTime: $scope.eTime,
           location: $scope.location,
           taxIdRequired: $scope.requireTax,
+          banner: $scope.banner,
           hostOrg: $scope.authentication.user.displayName
         }
       }).then(function (res) {

@@ -26,17 +26,18 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
     $scope.eTime = null;
     $scope.sTime = null;
     $scope.requireTax = null;
-    $scope.banner =  null;
+    $scope.banner = null;
+    
+    $http({
+          method: 'POST',
+          url: 'api/events/picture',
+        }).then(function (res) {
+          $scope.banner = res.banner;
+          console.log('Successful banner');
+        }, function (res) {
+          console.log('Failed banner');
+        });
 
-    // $http({
-    //       method: 'GET',
-    //       url: 'api/users/' + event.user._id
-    //     }).then(function (res) {
-    //       $scope.banner = res.eventImageURL;
-    //       console.log('Successful banner');
-    //     }, function (res) {
-    //       console.log('Failed banner');
-    //     });
 
     $scope.acceptEvent_flag = 0;
 
@@ -341,6 +342,16 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
       console.log($scope.name);
       //console.log($scope.date);
       //console.log($scope.sTime);
+      
+        $http({
+          method: 'POST',
+          url: 'api/events/picture',
+        }).then(function (res) {
+          $scope.banner = res.banner;
+          console.log('Successful banner');
+        }, function (res) {
+          console.log('Failed banner');
+        });
 
 
       $http({
@@ -353,8 +364,8 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
           endTime: $scope.eTime,
           location: $scope.location,
           taxIdRequired: $scope.requireTax,
-          banner: $scope.banner,
-          hostOrg: $scope.authentication.user.displayName
+          hostOrg: $scope.authentication.user.displayName,
+          banner: $scope.banner
         }
       }).then(function (res) {
         console.log('Successful event');

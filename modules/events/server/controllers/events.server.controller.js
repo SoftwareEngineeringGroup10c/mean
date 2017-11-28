@@ -11,15 +11,12 @@ var path = require('path'),
   config = require(path.resolve('./config/config')),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
-  // User = mongoose.model('User');
+
 /**
  * Create a Events
  */
 exports.create = function (req, res) {
   var event = new Events(req.body);
-  event.user = req.user;
-  event.banner = event.hostOrg.eventImageURL;
-  
   event.save(function (err) {
     if (err) {
       return res.status(400).send({
@@ -98,7 +95,6 @@ exports.list = function (req, res) {
 
 exports.changeEventPicture = function (req, res) {
   var event = req.event;
-  var user = req.user;
   var message = null;
   var upload = multer(config.uploads.eventUpload).single('newEventPicture');
   var eventUploadFileFilter = require(path.resolve('./config/lib/multer')).eventUploadFileFilter;
@@ -107,7 +103,7 @@ exports.changeEventPicture = function (req, res) {
   if (user) {
     upload(req, res, function (uploadError) {
       if(uploadError) {
-        // event.banner = user.eventImageURL;
+         event.banner = event.user.displayName.eventImageURL;
         return res.status(400).send({
           message: 'Error occurred while uploading event banner'
         });
