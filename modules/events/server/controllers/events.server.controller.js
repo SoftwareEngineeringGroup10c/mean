@@ -93,46 +93,46 @@ exports.list = function (req, res) {
   });
 };
 
-exports.changeEventPicture = function (req, res) {
-  var event = req.event;
-  var message = null;
-  var upload = multer(config.uploads.eventUpload).single('newEventPicture');
-  var eventUploadFileFilter = require(path.resolve('./config/lib/multer')).eventUploadFileFilter;
-  // Filtering to upload only images
-  upload.fileFiler = eventUploadFileFilter;
-  if (user) {
-    upload(req, res, function (uploadError) {
-      if(uploadError) {
-         event.banner = event.user.displayName.eventImageURL;
-        return res.status(400).send({
-          message: 'Error occurred while uploading event banner'
-        });
-      } else {
-        event.banner = config.uploads.eventUpload.dest + req.file.filename;
-
-        event.save(function (saveError) {
-          if (saveError) {
-            return res.status(400).send({
-              message: errorHandler.getErrorMessage(saveError)
-            });
-          } else {
-            req.login(user, function (err) {
-              if (err) {
-                res.status(400).send(err);
-              } else {
-                res.json(user);
-              }
-            });
-          }
-        });
-      }
-    });
-  } else {
-    res.status(400).send({
-      message: 'User is not signed in'
-    });
-  }
-};
+// exports.changeEventPicture = function (req, res) {
+//   var event = req.event;
+//   var message = null;
+//   var upload = multer(config.uploads.eventUpload).single('newEventPicture');
+//   var eventUploadFileFilter = require(path.resolve('./config/lib/multer')).eventUploadFileFilter;
+//   // Filtering to upload only images
+//   upload.fileFiler = eventUploadFileFilter;
+//   if (user) {
+//     upload(req, res, function (uploadError) {
+//       if(uploadError) {
+//          event.banner = event.user.displayName.eventImageURL;
+//         return res.status(400).send({
+//           message: 'Error occurred while uploading event banner'
+//         });
+//       } else {
+//         event.banner = config.uploads.eventUpload.dest + req.file.filename;
+//
+//         event.save(function (saveError) {
+//           if (saveError) {
+//             return res.status(400).send({
+//               message: errorHandler.getErrorMessage(saveError)
+//             });
+//           } else {
+//             req.login(user, function (err) {
+//               if (err) {
+//                 res.status(400).send(err);
+//               } else {
+//                 res.json(user);
+//               }
+//             });
+//           }
+//         });
+//       }
+//     });
+//   } else {
+//     res.status(400).send({
+//       message: 'User is not signed in'
+//     });
+//   }
+// };
 /**
  * Events middleware
  */
