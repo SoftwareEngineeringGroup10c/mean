@@ -151,7 +151,7 @@ a.button:focus {
 }
 
 .landing-page-hero {
-  position: fixed;
+  position: absolute;
   height: 100%;
   width: 100%;
   top: 50px;
@@ -290,19 +290,22 @@ h1, h2, th, label {
 /* FOOTER */
 /*--------------------*/
 
-
 #footer {
-  background-color: #0E3154 !important;
+  background-color: #1B5689 !important;
   display: inline-block;
   float: left;
-  position: fixed;
+  position: absolute;
+  bottom: -220px;
+  left: 0px;
+  /*height: 200px;*/
+  /*width: 100%;*/
 /*  margin-top: 100%;
   margin-bottom: 0px;*/
 
-  /*padding: 20px 20px;*/
-  min-width: 100%;
+  padding: 20px 20px;
+  width: 100%;
 
-    min-height:270px;
+    min-height:200px;
 
     font-family: 'Open Sans', sans-serif;
 }
