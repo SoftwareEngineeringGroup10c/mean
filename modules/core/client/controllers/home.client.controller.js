@@ -347,13 +347,14 @@ angular.module('core').controller('HomeController', ['$scope', '$compile', '$win
           // Format the date
           temp.start = new Date(year, month, date, hours);
 
+          console.log('Status: of ' + res.data[i].name + ' is ' + $scope.generateStatus(res.data[i]));
           // Check to see if the user logged in is the same one who made the event
-          if ($scope.authentication.user.roles.indexOf('Organization') >= 0) {
+          if ($scope.authentication.user.roles.indexOf('Organization') >= 0 && $scope.generateStatus(res.data[i]) === 'Accepted') {
             events.push(temp);
           }
 
           else {
-            if (res.data[i].user.displayName === $scope.authentication.user.displayName) {
+            if ($scope.authentication.user.roles.indexOf('Business') >= 0 && res.data[i].user.displayName === $scope.authentication.user.displayName) {
               events.push(temp);
             }
           }
