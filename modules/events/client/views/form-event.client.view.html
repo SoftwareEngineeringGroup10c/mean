@@ -9,14 +9,14 @@
       <fieldset>
         <div class="form-group" show-errors>
           <label class="control-label" for="name">Event Name</label>
-          <input name="name" type="text" ng-model="vm.event.name" id="name" class="form-control" placeholder="Name" required>
+          <input name="name" type="text" ng-model="vm.event.name" id="name" class="form-control" placeholder="Enter an event name" required>
           <div ng-messages="vm.form.eventForm.name.$error" role="alert">
             <p class="help-block error-text" ng-message="required">An event name is required.</p>
           </div>
         </div>
         <div class="form-group" show-errors>
           <label class="control-label" for="location">Location</label>
-          <input name="location" type="text" ng-model="vm.event.location" id="location" class="form-control" placeholder="Location" required>
+          <input name="location" type="text" ng-model="vm.event.location" id="location" class="form-control" placeholder="Enter a location" required>
           <div ng-messages="vm.form.eventForm.location.$error" role="alert">
             <p class="help-block error-text" ng-message="required">A location is required.</p>
           </div>
@@ -70,8 +70,8 @@
         </div>
       </form>
         <div class="form-group" style="text-align: center;">
-          <button class="btn btn-danger" onclick="window.history.back();">Cancel</button>
-          <button type="submit" class="btn btn-primary">{{vm.event._id ? 'Update Event' : 'Create'}} </button>
+          <button class="btn btn-danger" ui-sref="bizDash.eventList">Cancel</button>
+          <button type="submit" class="btn btn-warning">{{vm.event._id ? 'Update Event' : 'Create'}} </button>
         </div>
         <div ng-show="vm.error" class="text-danger">
           <strong ng-bind="vm.error"></strong>
