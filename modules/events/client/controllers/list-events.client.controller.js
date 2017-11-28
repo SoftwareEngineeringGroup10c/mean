@@ -166,7 +166,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
     };
 
     $scope.getButtonStyle_two = function (event) {
-      if (event.organizationsPending.length != 0) {
+      if (event.organizationsPending.length !== 0) {
         return '';
       } else {
         return 'disabled';
