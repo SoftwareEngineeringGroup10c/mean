@@ -255,7 +255,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
             url: 'api/notifications',
             data: {
               data: $scope.authentication.user.displayName + ' cancelled an event that was previously approved on ' + event.dateOfEvent,
-              userList: event.user.displayName
+              userList: event.hostOrg
             }
           }).then(function (res) {
             console.log('Successful notification');
@@ -268,7 +268,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
           method: 'PUT',
           url: 'api/events/' + event._id,
           data: {
-            organizationsPending: event.organizationsPending.splice(event.organizationsPending.indexOf($scope.authentication.user.displayName), 1),
+            organizationsPending: event.organizationsPending.splice(event.organizationsPending.indexOf($scope.authentication.user.displayName), 0),
             organizationConfirmed: newConfirmed
           }
         }).then(function (res) {
