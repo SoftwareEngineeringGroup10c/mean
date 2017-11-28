@@ -136,6 +136,19 @@
   border-radius: 5px;
   background-color: rgba(249, 249, 249, 0.95);
 }
+
+.reset-password-container{
+    display: inline-block;
+    text-align: center;
+    margin: 0 auto;
+    padding: 40px;
+    border-width:1px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 5px;
+    background-color: rgba(249, 249, 249, 0.95);
+}
+
 .btn btn-danger{
    padding: 5px, 15px;
 }
