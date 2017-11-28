@@ -4,22 +4,22 @@
     <form name="userForm" ng-submit="signup(userForm.$valid)" class="login" novalidate autocomplete="off">
       <fieldset>
         <div class="form-group" show-errors>
-          <label for="role">Role</label>
+          <label for="role">Account Type</label>
           <div class="radio">
-            <label><input type="radio" id="role" name="role" ng-model="credentials.roles" value="Organization" required>Organization</label>
+            <label><input type="radio" id="role" name="role" ng-model="credentials.roles" value="Organization" required>Student Organization</label>
           </div>
           <div class="radio">
             <label><input type="radio" id="role" name="role" ng-model="credentials.roles" value="Business" required>Business</label>
           </div>
           <div ng-messages="userForm.roles.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Role is required.</p>
+            <p class="help-block error-text" ng-message="required">Account type is required.</p>
           </div>
         </div>
         <div class="form-group" show-errors>
-          <label for="organization">School Organization/Business</label>
-          <input type="text" id="organization" name="organization" class="form-control" ng-model="credentials.organization" placeholder="Organization/Business" required>
+          <label for="organization">Student Organization/Business</label>
+          <input type="text" id="organization" name="organization" class="form-control" ng-model="credentials.organization" placeholder="Student Organization/Business" required>
           <div ng-messages="userForm.organization.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">School Organization is required.</p>
+            <p class="help-block error-text" ng-message="required">Student Organization is required.</p>
           </div>
         </div>
         <!--<div class="form-group" show-errors>-->
@@ -39,7 +39,7 @@
         <!--</div>-->
         <div class="form-group" show-errors>
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" class="form-control" ng-model="credentials.username" placeholder="Email" maxlength="60" ng-maxlength="60" lowercase required>
+          <input type="email" id="email" name="email" class="form-control" ng-model="credentials.username" placeholder="Email" maxlength="60" ng-maxlength="60">
           <div ng-messages="userForm.username.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Email is required.</p>
             <p class="help-block error-text" ng-message="email">Your email address is invalid</p>

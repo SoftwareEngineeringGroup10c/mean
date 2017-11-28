@@ -30,7 +30,8 @@
 
   <!-- Fav Icon -->
   <link type="image/icon" rel="shortcut icon" href="modules\core\client\img\agora_app_icon.png">
-
+<!-- Font Awesome -->
+    <link href="assets/css/font-awesome.css" rel="stylesheet">
   <!-- carousel support -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,13 +44,13 @@
 </head>
 
 <body class="ng-cloak"  style="background-color:#dddddd">
-  <header ng-include="'/modules/core/client/views/header.client.view.html'" class="navbar navbar-expand-sm" style="background-color:#1B5689"></header>
+  <header id="header" ng-include="'/modules/core/client/views/header.client.view.html'" class="navbar navbar-expand-sm" style="background-color:#1B5689"></header>
   <section class="content">
     <section class="container">
       {% block content %}{% endblock %}
     </section>
   </section>
-
+  
   <!--Embedding The User Object-->
   <script type="text/javascript">
     var user = {{ user | json | safe }};
@@ -65,6 +66,7 @@
   <!--Livereload script rendered -->
   <script type="text/javascript" src="{{host}}:35729/livereload.js"></script>
   {% endif %}
+
 </body>
 
 </html>

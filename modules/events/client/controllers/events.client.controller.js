@@ -17,75 +17,72 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
-    vm.upsuccess = null;
-    vm.uperror = null;
+    // vm.banner = vm.event.banner;
 
-    vm.imageURL = event.banner;
+    // // Create file uploader instance
+    // vm.uploader = new FileUploader({
+    //   url: 'api/events/picture',
+    //   alias: 'newEventPicture'
+    // });
 
-    // Create file uploader instance
-    vm.uploader = new FileUploader({
-      url: 'api/events/picture',
-      alias: 'newEventBanner'
-    });
+    // // Set file uploader image filter
+    // vm.uploader.filters.push({
+    //   name: 'imageFilter',
+    //   fn: function (item, options) {
+    //     var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+    //     return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+    //   }
+    // });
 
-    // Set file uploader image filter
-    vm.uploader.filters.push({
-      name: 'imageFilter',
-      fn: function (item, options) {
-        var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-        return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-      }
-    });
+    // // Called after the event selected a new picture file
+    // vm.uploader.onAfterAddingFile = function (fileItem) {
+    //   if ($window.FileReader) {
+    //     var fileReader = new FileReader();
+    //     fileReader.readAsDataURL(fileItem._file);
 
-    // Called after the event selected a new picture file
-    vm.uploader.onAfterAddingFile = function (fileItem) {
-      if ($window.FileReader) {
-        var fileReader = new FileReader();
-        fileReader.readAsDataURL(fileItem._file);
+    //     fileReader.onload = function (fileReaderEvent) {
+    //       $timeout(function () {
+    //         vm.banner = fileReaderEvent.target.result;
+    //       }, 0);
+    //     };
+    //   }
+    // };
 
-        fileReader.onload = function (fileReaderEvent) {
-          $timeout(function () {
-            vm.imageURL = fileReaderEvent.target.result;
-          }, 0);
-        };
-      }
-    };
+    // // Called after the event has successfully uploaded a new picture
+    // vm.uploader.onSuccessItem = function (fileItem, response, status, headers) {
+    //   // Show success message
+    //   vm.success = true;
 
-    // Called after the event has successfully uploaded a new picture
-    vm.uploader.onSuccessItem = function (fileItem, response, status, headers) {
-      // Show success message
-      vm.upsuccess = true;
+    //   // Populate event object
+    //   vm.event = Authentication.event = response;
 
-      // Populate event object
-      vm.event = Authentication.event = response;
+    //   // Clear upload buttons
+    //   vm.cancelUpload();
+    // };
 
-      // Clear upload buttons
-      vm.cancelUpload();
-    };
+    // // Called after the event has failed to uploaded a new picture
+    // vm.uploader.onErrorItem = function (fileItem, response, status, headers) {
+    //   // Clear upload buttons
+    //   vm.cancelUpload();
 
-    // Called after the event has failed to uploaded a new picture
-    vm.uploader.onErrorItem = function (fileItem, response, status, headers) {
-      // Clear upload buttons
-      vm.cancelUpload();
+    //   // Show error message
+    //   vm.error = response.message;
+    // };
 
-      // Show error message
-      vm.uperror = response.message;
-    };
+    // // Change event profile picture
+    // function uploadEventPicture() {
+    //   // Clear messages
+    //   vm.success = vm.error = null;
 
-    // Change event profile picture
-    function uploadEventPicture() {
-      // Clear messages
-      vm.upsuccess = vm.uperror = null;
+    //   // Start upload
+    //   vm.uploader.uploadAll();
+    // }
 
-      // Start upload
-      vm.uploader.uploadAll();
-    }
-
-    // Cancel the upload process
-    function cancelUpload() {
-      vm.uploader.clearQueue();
-      vm.imageURL = vm.event.banner;
-    }
+    // // Cancel the upload process
+    // function cancelUpload() {
+    //   vm.uploader.clearQueue();
+    //   vm.banner = vm.event.banner;
+    // }
 
     // Remove existing Event
     function remove() {

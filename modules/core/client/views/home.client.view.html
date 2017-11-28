@@ -1,28 +1,84 @@
 <body>
-<section ng-controller="HomeController" ng-init="refreshHandler()">
-  <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner">
-      <div class="item" ng-repeat="event in eventList" ng-class="{active : $first}">
-        <img src={{event.banner}} alt="carousel {{$index}}">
-        <div class="carousel-caption">
-          <h3 id="eventData">{{event.name}}</h3>
-          <h4 id="eventData">{{event.dateOfEvent | date:"MM'/'dd'/'yyyy"}}  {{event.startTime | date:"hh:mm a"}} - {{event.endTime | date:"hh:mm a"}}</h4>
-          <p id="eventData">{{event.location}}</p>
-        </div>
+<!-- <section ng-controller="HomeController">
+  <div class="container-fluid dashboard-container">
+    <div class="row">
+      <div class="col-sm-6" style="justify-content: center">
+        <h2 style="text-align: center">Student Organizations</h2>
+
+          <font size="3"> Register with Agora fundraising to connect with local businesses to
+            organize fundraising events. You are able to search for events based on location,
+            time, and business in order to find the perfect venue for your next fundraiser.</font>
+
+      </div>
+      <div class="col-sm-6" style="justify-content: center">
+        <h2 style="text-align: center">Businesses</h2>
+        <font size="3">
+          Register with Agora Fundraising to make your business available to student
+          organizations.
+          Work with organizations to boost sales through various fundraising opportunities at your business.
+          This way, you can give back to your community by helping local students.</font>
+
       </div>
     </div>
-    <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" data-slide="prev" style="font-family:'', serif !important">
-      <span class="glyphicon glyphicon-chevron-left"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" data-slide="next" style="font-family:'', serif !important">
-      <span class="glyphicon glyphicon-chevron-right"></span>
-      <span class="sr-only">Next</span>
-    </a>
-  </div>
-  <div ui-view>
+    <div class="row" style="justify-content: center">
+      <h2 style="text-align: center">Want to know more? Click <a ui-sref="faq">here</a> for more information.</h2>
     </div>
-</section>
-</body>
+</div>
+</section> -->
+<div class="landing-page-hero">
+  <div class="landing-page-overlay">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-6 col-xs-12">
+          <div class="landing-page-overlay-text-background">
+            <h1 class="landing-page-overlay-text">Facilitating fundraising by connecting student organizations and businesses</h1>
+            <div style="text-align: center;padding-bottom:20px;padding-top:10px">
+              <button type="button" ui-sref="about" class="btn btn-warning landing-page-overlay-buttons">Learn More</button>
+              <button type="button" ui-sref="faq" class="btn btn-warning landing-page-overlay-buttons">Questions?</button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+            <!-- <div class="container">
+                <div class="row">
+                </div>
+            </div>
+       <footer id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6">
+                        <div class="footerleft">
+                            <div class="logofooter">
+                              <h6 class="heading7">Powered By:
+                                <a class="logo" href="http://agoraorg.com"><img src="modules\core\client\img\logo_white_png_small.png" alt="logo"></a></h6>
+                            </div>
+                            <p><i class="glyphicon glyphicon-map-marker"></i> 978 SW 2nd AVE, Gainesville, FL, USA 32601</p>
+                            <p><i class="glyphicon glyphicon-phone"></i> Phone: 708-306-0140</p>
+                            <p><i class="glyphicon glyphicon-envelope"></i> E-mail : info@agoraorg.com</p>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-6 paddingtop-bottom">
+                        <h6 class="heading7">PAGES</h6>
+                        <ul class="footer-ul">
+                            <li><a ui-sref= "authentication.signup"> Sign Up</a></li>
+                            <li><a ui-sref="about">About Us</a></li>
+                            <li><a ui-sref="faq"> FAQ</a></li>
+                            <li><a href="https://agoraorg.com/privacy"> Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-6 paddingtop-bottom">
+                        <h6 class="heading7">FOLLOW US</h6>
+                        <div class="footer-social">
+                            <i class="fa fa-facebook"></i> <a href="https://www.facebook.com/agoraorganizations">Facebook</a>
+                            <i class="fa fa-linkedin"></i> <a href="https://www.linkedin.com/company/agoraorganizations">LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer> -->
+        </body>

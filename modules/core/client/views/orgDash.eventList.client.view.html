@@ -1,10 +1,10 @@
 <div class="row" style="justify-content: center" ng-controller="EventsListController">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <h2 style="text-align:center">Requested Events</h2>
+  <h2 style="text-align:center">Event Requests</h2>
   <div><input type="text" class="form-control" placeholder="Search list of requested events" ng-model="query">
     <br>
   </div>
-  <div class = "panel" style="max-height: 300px;overflow: auto">
+  <div class = "panel" style="max-height: 450px;overflow: auto">
     <table class="table table-striped table-bordered table-hover">
       <thead>
         <tr>
@@ -27,19 +27,19 @@
             Time
             <span ng-show="sortType == 'startTime' && !sortReverse" class="fa fa-caret-down"></span>
           </a></th>
-          <th>Status</th>
-          <th>Event Settings</th>
+          <th><a href="#"> Status</a></th>
+          <th><a href="#"> Event Settings</a></th>
         </tr>
       </thead>
       <tbody ng-repeat="event in eventList | filter:query | orderBy:sortType:sortReverse">
         <tr ng-show="$parent.filterOrgEvents(event) && !filterEventsDate(event)">
-          <th>{{event.user.displayName}}</th>
+          <th>{{event.hostOrg}}</th>
           <td>{{event.dateOfEvent | date:"MM'/'dd'/'yyyy"}}</td>
           <td>{{event.location}}</td>
           <td>{{event.startTime | date:"hh':'mm a"}} - {{event.endTime | date:"hh':'mm a"}}</td>
           <td>{{generateStatus(event)}}
             <td>
-              <button class="btn btn-danger" style="display: block; margin:auto" ng-click="deleteOrgRequest(event)">Cancel Event<br>Request</button>
+              <button class="btn btn-danger" style="display: block; margin:auto" ng-click="deleteOrgRequest(event); loadEventList();">Cancel Event<br>Request</button>
             </td>
           </td>
         </tr>
