@@ -249,7 +249,6 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
         }
 
         if (event.organizationConfirmed === $scope.authentication.user.displayName) {
-          console.log(event.user.displayName);
           $http({
             method: 'POST',
             url: 'api/notifications',

@@ -39,7 +39,7 @@
           <td>{{event.startTime | date:"hh':'mm a"}} - {{event.endTime | date:"hh':'mm a"}}</td>
           <td>{{generateStatus(event)}}
             <td>
-              <button class="btn btn-danger" style="display: block; margin:auto" ng-click="deleteOrgRequest(event); loadEventList();">Cancel Event<br>Request</button>
+              <button class="btn btn-danger" style="display: block; margin:auto" ng-click="deleteOrgRequest(event);">Cancel Event<br>Request</button>
             </td>
           </td>
         </tr>
