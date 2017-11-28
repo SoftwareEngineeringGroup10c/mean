@@ -120,8 +120,9 @@
       describe('$scope.signup()', function () {
         it('should register with correct data', function () {
           // Test expected GET request
-          scope.authentication.user = 'test@test.com';
-          $httpBackend.when('POST', '/api/auth/signup').respond(200, 'test@test.com');
+          scope.authentication.user = 'Fred';
+
+          $httpBackend.when('POST', '/api/auth/signup').respond(200, 'Fred');
 
           scope.signup(true);
           $httpBackend.flush();
