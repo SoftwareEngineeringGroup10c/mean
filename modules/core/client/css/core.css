@@ -151,9 +151,9 @@ a.button:focus {
 }
 
 .landing-page-hero {
-  position: fixed;
+  position: absolute;
   height: 100%;
-  /*width: 100%;*/
+  width: 100%;
   top: 50px;
   left: 0px;
   background-size: cover;
@@ -295,7 +295,7 @@ h1, h2, th, label {
   display: inline-block;
   /*float: left;*/
   position: absolute;
-  bottom: 0;
+  bottom: -200px;
   /*height: 200px;*/
   /*width: 100%;*/
 /*  margin-top: 100%;
