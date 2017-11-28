@@ -165,6 +165,14 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
       }
     };
 
+    $scope.getButtonStyle_two = function (event) {
+      if (event.organizationsPending.length != 0) {
+        return '';
+      } else {
+        return 'disabled';
+      }
+    };
+
     //Determines whether or not the current user is confirmed for an event
     $scope.generateStatus = function (event) {
       if (event.organizationConfirmed === $scope.authentication.user.displayName) {
