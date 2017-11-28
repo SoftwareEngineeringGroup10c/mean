@@ -257,19 +257,19 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
       }
     };
 
-        // $http({
-        //   method: 'PUT',
-        //   url: 'api/events/' + event._id,
-        //   data: {
-        //     organizationsPending: event.organizationsPending.splice(event.organizationsPending.indexOf($scope.authentication.user.displayName), 1),
-        //     organizationConfirmed: newConfirmed
-        //   }
-        // }).then(function (res) {
-        //   console.log('Successful org event delete');
-        // }, function (res) {
-        //   console.log('Failed org event delete');
-        //   console.log(res);
-        // });
+    // $http({
+    //   method: 'PUT',
+    //   url: 'api/events/' + event._id,
+    //   data: {
+    //     organizationsPending: event.organizationsPending.splice(event.organizationsPending.indexOf($scope.authentication.user.displayName), 1),
+    //     organizationConfirmed: newConfirmed
+    //   }
+    // }).then(function (res) {
+    //   console.log('Successful org event delete');
+    // }, function (res) {
+    //   console.log('Failed org event delete');
+    //   console.log(res);
+    // });
 
 
     //Initially loading the events
