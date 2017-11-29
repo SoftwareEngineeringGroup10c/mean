@@ -6,7 +6,7 @@
 
 
 .btn {
-    padding: 14px 24px;
+    padding: 5px 15px;
     border: 0 none;
     font-weight: 700;
     letter-spacing: 1px;
@@ -63,6 +63,8 @@
 .user-profile-picture {
   max-height: 150px;
   min-height: 150px;
+  min-width: 150px;
+  max-width: 150px;
   overflow: hidden;
 }
 .user-event-picture {
@@ -96,7 +98,7 @@
   border-color: black;
   border-radius: 5px;
   border-style: solid;
-  background-color: rgba(249, 249, 249, 0.85);
+  background-color: rgba(249, 249, 249, 0.95);
 }
 
 .settings-header {
@@ -111,12 +113,12 @@
   border-color: black;
   border-style: solid;
   border-radius: 5px;
-  background-color: rgba(249, 249, 249, 0.85);
+  background-color: rgba(249, 249, 249, 0.95);
 }
 
 .settings-column {
   width: 100%;
-  float: left;
+  float: center;
   overflow: hidden;
 }
 
@@ -132,5 +134,21 @@
   border-color: black;
   border-style: solid;
   border-radius: 5px;
-  background-color: rgba(249, 249, 249, 0.85);
+  background-color: rgba(249, 249, 249, 0.95);
+}
+
+.reset-password-container{
+    display: inline-block;
+    text-align: center;
+    margin: 0 auto;
+    padding: 40px;
+    border-width:1px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 5px;
+    background-color: rgba(249, 249, 249, 0.95);
+}
+
+.btn btn-danger{
+   padding: 5px, 15px;
 }

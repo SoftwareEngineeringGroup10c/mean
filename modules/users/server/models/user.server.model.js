@@ -68,11 +68,11 @@ var UserSchema = new Schema({
   },
   profileImageURL: {
     type: String,
-    default: 'modules/users/client/img/profile/default.png'
+    default: './modules/users/client/services/img/profile/default.png'
   },
   eventImageURL: {
     type: String,
-    default: 'modules/users/client/img/default_banner.jpg'
+    default: './modules/users/client/services/img/event/default_banner.png'
   },
   provider: {
     type: String,
@@ -88,10 +88,6 @@ var UserSchema = new Schema({
     default: ['user'],
     required: 'Please provide at least one role'
   },
-  // schoolName: {
-  //   type: String,
-  //   required: true
-  // },
   contact: {
     firstName: {
       type: String,

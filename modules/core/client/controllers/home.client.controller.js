@@ -248,7 +248,7 @@ angular.module('core').controller('HomeController', ['$scope', '$compile', '$win
 
     //Checks if the event was made by the user
     $scope.filterByUser = function (event) {
-      return event.user.displayName === $scope.authentication.user.displayName;
+      return event.hostOrg === $scope.authentication.user.displayName;
     };
 
     $scope.filterNotificationsByUser = function (notification) {
@@ -276,6 +276,7 @@ angular.module('core').controller('HomeController', ['$scope', '$compile', '$win
           endTime: $scope.eTime,
           location: $scope.location,
           taxIdRequired: $scope.requireTax,
+          banner: $scope.banner,
           hostOrg: $scope.authentication.user.displayName
         }
       }).then(function (res) {
@@ -347,15 +348,14 @@ angular.module('core').controller('HomeController', ['$scope', '$compile', '$win
           // Format the date
           temp.start = new Date(year, month, date, hours);
 
+          console.log('Status: of ' + res.data[i].name + ' is ' + $scope.generateStatus(res.data[i]));
           // Check to see if the user logged in is the same one who made the event
-          if ($scope.authentication.user.roles.indexOf('Organization') >= 0) {
+          if ($scope.authentication.user.roles.indexOf('Organization') >= 0 && $scope.generateStatus(res.data[i]) === 'Accepted') {
             events.push(temp);
           }
 
-          else {
-            if (res.data[i].user.displayName === $scope.authentication.user.displayName) {
-              events.push(temp);
-            }
+          else if ($scope.authentication.user.roles.indexOf('Business') >= 0 && res.data[i].hostOrg === $scope.authentication.user.displayName) {
+            events.push(temp);
           }
         }
 
