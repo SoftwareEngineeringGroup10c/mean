@@ -41,25 +41,6 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
 
     $scope.acceptEvent_flag = 0;
 
-    $scope.eventList = [
-      {
-        bizName: 'Blaze',
-        date: '10/17/17',
-        status: 'Pending'
-      }, {
-        bizName: 'Taco Bell',
-        date: '11/12/23',
-        status: 'Confirmed'
-      }, {
-        bizName: 'Blaze',
-        date: '10/17/17',
-        status: 'Pending'
-      }, {
-        bizName: 'Taco Bell',
-        date: '11/12/23',
-        status: 'Confirmed'
-      }];
-
     //Loads the events database list into the eventList scope variable
     $scope.loadEventList = function () {
       $http({
@@ -79,6 +60,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
     $scope.deleteEvent = function (event) {
       if ($window.confirm('Are you sure you want to delete this event?')) {
         if (event.organizationsPending.length > 0) {
+          //Create a notification when the event was already confirmed
           $http({
             method: 'POST',
             url: 'api/notifications',
@@ -93,6 +75,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
           });
         }
 
+        //Create a notification when the event was already confirmed
         if (event.organizationConfirmed !== '') {
           $http({
             method: 'POST',
@@ -108,6 +91,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
           });
         }
 
+        //Send the http request to delete the event
         $http({
           method: 'DELETE',
           url: 'api/events/' + event._id
@@ -129,6 +113,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
         return;
       }
 
+      //Create a notification when the event is requested
       $http({
         method: 'POST',
         url: 'api/notifications',
@@ -142,6 +127,8 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
         console.log('Failed notification');
       });
 
+
+      //Create the event via http request
       $http({
         method: 'PUT',
         url: 'api/events/' + event._id,
@@ -156,7 +143,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
       });
     };
 
-
+    //returns the style of the button if it should be disabled
     $scope.getButtonStyle = function (event) {
       if (event.organizationConfirmed === '') {
         return '';
@@ -165,6 +152,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
       }
     };
 
+    //returns the style of the button if it should be disabled
     $scope.getButtonStyle_two = function (event) {
       if (event.organizationsPending.length !== 0) {
         return '';
@@ -195,6 +183,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
         orgData = event.organizationsPending[index];
       }
 
+      //Sets the confirmed organization when the event is approved
       $http({
         method: 'PUT',
         url: 'api/events/' + event._id,
@@ -210,6 +199,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
         console.log(res);
       });
 
+      //Send a notification to the accepted user
       $http({
         method: 'POST',
         url: 'api/notifications',
@@ -248,6 +238,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
           newConfirmed = '';
         }
 
+        //If the organization was confirmed, send a notification to the business
         if (event.organizationConfirmed === $scope.authentication.user.displayName) {
           $http({
             method: 'POST',
@@ -263,6 +254,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
           });
         }
 
+        //Update the event to reflect the updated request list
         $http({
           method: 'PUT',
           url: 'api/events/' + event._id,
@@ -279,6 +271,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
       }
     };
 
+    //Deleted the organization request without a confirmation alert
     $scope.deleteOrgRequestNoNote = function (event) {
 
       var newConfirmed = event.organizationConfirmed;
@@ -287,6 +280,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
         newConfirmed = '';
       }
 
+      //If the organization was confirmed, send a notification to the business
       if (event.organizationConfirmed === $scope.authentication.user.displayName) {
         console.log(event.user.displayName);
         $http({
@@ -307,6 +301,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
       console.log($scope.authentication.user.displayName);
       console.log(newPending);
 
+      //Update the event to reflect the updated request list
       $http({
         method: 'PUT',
         url: 'api/events/' + event._id,
@@ -356,6 +351,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
       //console.log($scope.date);
       //console.log($scope.sTime);
       
+        //Add the picture
         $http({
           method: 'POST',
           url: 'api/events/picture',
@@ -367,6 +363,8 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
         });
 
 
+
+      //Create the event object in the database
       $http({
         method: 'POST',
         url: '/api/events',
@@ -404,6 +402,7 @@ angular.module('events').controller('EventsListController', ['$scope', '$window'
       console.log($scope.globalEvent);
     };
 
+    //Obsolete
     $scope.refreshHandler = function () {
       console.log('refresh');
       if ($scope.authentication.user.roles.indexOf('Organization') >= 0) {
