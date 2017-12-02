@@ -1,6 +1,9 @@
+<!--signup form-->
+
 <div ng-controller="AuthenticationController">
   <div class="col-xs-offset-2 col-xs-8 col-md-offset-3 col-md-6 signup-container">
     <p class="signup-header text-center">Sign Up</p>
+    <!-- turns off native html validation so we can implement our own-->
     <form name="userForm" ng-submit="signup(userForm.$valid)" class="login" novalidate autocomplete="off">
       <fieldset>
         <div class="form-group" show-errors>

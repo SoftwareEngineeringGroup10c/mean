@@ -1,6 +1,9 @@
+<!--login form-->
+
 <div ng-controller="AuthenticationController" style="background-color: #eeeeee; border-color:black; border-width: 2px">
   <div class="col-xs-offset-2 col-xs-4 col-md-offset-4 col-md-4 login-container">
     <p class="login-header text-center">Log In</p>
+    <!--novalidate turns off inate html validation so we can do our own-->
     <form name="userForm" ng-submit="login(userForm.$valid)" class="login" novalidate autocomplete="off">
       <fieldset>
         <div class="form-group" show-errors>
