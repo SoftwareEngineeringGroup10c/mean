@@ -33,4 +33,10 @@ http://agora-fundraising.herokuapp.com
 </ol>
 <br>
 <h2>How to Update Database Connection</h2>
-<h3>
+<ol>
+	<li>Register an account at mlab.com</li>
+	<li>Create a new database</li>
+	<li>Copy the URI for the database</li>
+	<li>Navigate to config/env/ and open the development file</li>
+	<li>In line 7 replace the green text with the copied URI</li>
+</ol>
